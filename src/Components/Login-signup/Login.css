@@ -4,7 +4,7 @@
   margin: auto;
   margin-top: 200px;
   background: rgb(255, 254, 254);
-  width: 370px;
+  width: 335px;
   border-radius: 10px;
   box-shadow: 1px 1px 20px black;
   position: relative;
@@ -58,7 +58,7 @@
 
   color: rgb(0, 0, 0);
   padding-left: 10px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
@@ -120,7 +120,7 @@
   margin: 10px 35px;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .remember p {

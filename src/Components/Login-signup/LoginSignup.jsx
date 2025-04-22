@@ -10,7 +10,7 @@ import "./Login.css";
 import { useState } from "react";
 
 const LoginSignup = () => {
-  const [showPass, setShowPass] = useState(false);
+  const [showPass, setShowPass] = useState(true);
   const toggleVisibility = () => {
     setShowPass(!showPass);
   };
