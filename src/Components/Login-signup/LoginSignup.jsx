@@ -47,12 +47,12 @@ const LoginSignup = () => {
           {action === "Sign up" ? (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} placeholder='Password' />
+              <input type={showPass ? "password" : "text"} name='signup-pass' placeholder='Password' />
             </div>
           ) : (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} placeholder='Password' />
+              <input type={showPass ? "password" : "text"} name='login-pass' placeholder='Password' />
               <img src={eyeIcon} className='passshow' alt='' onClick={toggleVisibility} />
             </div>
           )}
@@ -61,11 +61,12 @@ const LoginSignup = () => {
           ) : (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} placeholder='Confirm Password' />
+              <input type={showPass ? "password" : "text"} name='signup-pass' placeholder='Confirm Password' />
               <img src={eyeIcon} alt='' className='passshow' onClick={toggleVisibility} />
             </div>
           )}
         </div>
+
         {action === "Sign up" ? (
           <></>
         ) : (
