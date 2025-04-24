@@ -9,8 +9,14 @@ import "./Login.css";
 
 import { useState } from "react";
 
-const LoginSignup = () => {
+const LoginPage = () => {
   const [showPass, setShowPass] = useState(true);
+  const [insert, setInsert] = useState("");
+
+  const insertPass = (e) => {
+    setInsert(e.target.value);
+  };
+
   const toggleVisibility = () => {
     setShowPass(!showPass);
   };
@@ -38,22 +44,20 @@ const LoginSignup = () => {
               <input type='text' placeholder='Username' />
             </div>
           )}
-
           <div className='input'>
             <img src={emailIcon} alt='' />
-            <input type='email' placeholder='Email Address' />
+            <input type='email' placeholder='Email Address' required />
           </div>
-
           {action === "Sign up" ? (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} name='signup-pass' placeholder='Password' />
+              <input type={showPass ? "password" : "text"} name='signup-pass1' placeholder='Password' />
             </div>
           ) : (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} name='login-pass' placeholder='Password' />
-              <img src={eyeIcon} className='passshow' alt='' onClick={toggleVisibility} />
+              <input type={showPass ? "password" : "text"} onChange={insertPass} name='login-pass' placeholder='Password' />
+              {insert ? <img src={eyeIcon} alt='' className='passEye' onClick={toggleVisibility} /> : ""}
             </div>
           )}
           {action === "Login" ? (
@@ -61,8 +65,8 @@ const LoginSignup = () => {
           ) : (
             <div className='input'>
               <img src={passwordIcon} alt='' />
-              <input type={showPass ? "password" : "text"} name='signup-pass' placeholder='Confirm Password' />
-              <img src={eyeIcon} alt='' className='passshow' onClick={toggleVisibility} />
+              <input type={showPass ? "password" : "text"} onChange={insertPass} name='signup-pass2' placeholder='Confirm Password' />
+              {insert ? <img src={eyeIcon} alt='' className='passEye' onClick={toggleVisibility} /> : ""}
             </div>
           )}
         </div>
@@ -71,13 +75,19 @@ const LoginSignup = () => {
           <></>
         ) : (
           <div className='remember'>
-            <input type='checkbox' name='remember' />
-            <p>Remember this device!</p>
+            {insert ? (
+              <>
+                <input type='checkbox' name='remember' />
+                <p>Remember this device!</p>{" "}
+              </>
+            ) : (
+              ""
+            )}
           </div>
         )}
 
         <div className='submitContainer'>
-          <div className='button'>{action}</div>
+          {insert ? <div className='button'>{action}</div> : ""}
           {action === "Login" ? (
             <div className='login'>
               <div className='forgot'>
@@ -110,4 +120,4 @@ const LoginSignup = () => {
   );
 };
 
-export default LoginSignup;
+export default LoginPage;

@@ -69,12 +69,12 @@ body {
   font-weight: bold;
 }
 
-.passshow {
-  opacity: 50%;
+.passEye {
+  opacity: 30%;
 }
 
-.passshow:hover {
-  opacity: 70%;
+.passEye:hover {
+  opacity: 80%;
 }
 
 .inputs input:focus {
@@ -92,15 +92,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.705);
+  background-color: rgb(114, 114, 114);
   width: 80px;
-  height: 30px;
-  color: white;
+  height: 25px;
+  color: rgb(255, 255, 255);
   margin: 5px auto;
   padding-bottom: 5px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 25px;
   cursor: pointer;
   transition: transform 0.1s;
 }
