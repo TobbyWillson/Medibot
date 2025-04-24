@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import LoginPage from "./Components/Login-signup/LoginPage";
 import SignupPage from "./Components/Login-signup/SignupPage";
 
@@ -8,7 +7,7 @@ function App() {
   return (
     <div>
       <LoginPage />
-      <SignupPage />
+      {/* <SignupPage /> */}
     </div>
   );
 }
