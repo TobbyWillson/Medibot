@@ -117,11 +117,6 @@ body {
   margin: 15px auto;
 }
 
-.login {
-  margin-top: 15px;
-  font-size: 13px;
-}
-
 .remember {
   margin: 10px 35px;
   display: flex;
@@ -133,10 +128,30 @@ body {
   margin-left: 10px;
 }
 
-.forgot {
+.account-checker .forgot,
+.signup,
+.login {
+  display: flex;
+  justify-content: center;
   margin: 10px 0;
   font-size: 13px;
-  text-align: center;
+}
+
+.account-checker p {
+  margin-right: 5px;
+}
+
+.account-checker a {
+  text-decoration: none;
+  color: rgb(115, 173, 224);
+}
+
+.account-checker a:focus {
+  color: red;
+}
+
+.account-checker a:hover {
+  color: blueviolet;
 }
 
 span {
