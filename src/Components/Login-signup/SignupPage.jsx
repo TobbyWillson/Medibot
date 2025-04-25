@@ -6,6 +6,7 @@ import eyeIcon from "../Assets/eye-icon.png";
 import stethoscope from "../Assets/stethoscope.png";
 
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
@@ -63,7 +64,7 @@ const SignupPage = () => {
           <div className='account-checker'>
             <div className='login'>
               <p>Already have an account?</p>
-              <a href='/login'>Login</a>
+              <Link to='/login'>Login</Link>
             </div>
           </div>
         </div>

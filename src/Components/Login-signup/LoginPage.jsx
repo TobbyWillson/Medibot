@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import emailIcon from "../Assets/email-icon.png";
 import passwordIcon from "../Assets/password-icon.png";
@@ -61,12 +61,12 @@ const LoginPage = () => {
         <div className='account-checker'>
           <div className='forgot'>
             <p>Forgot password?</p>
-            <a href='/forgot-password'>Click Here</a>
+            <Link to='/forgot-password'>Click Here</Link>
           </div>
 
           <div className='signup'>
             <p>Do not have an account yet?</p>
-            <a href='/signup'>Sign up</a>
+            <Link to='/signup'>Sign up</Link>
           </div>
         </div>
       </div>
