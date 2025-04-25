@@ -7,7 +7,7 @@ const NotFound = () => {
     <div className='notfound'>
       <FaExclamationTriangle className='erroricon' />
       <h1>404 Not Found</h1>
-      <p>This Page does not exist</p>
+      <p>This page does not exist yet</p>
       <Link to='/login' className='goback'>
         Go back
       </Link>
