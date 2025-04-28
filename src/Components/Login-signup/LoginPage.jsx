@@ -57,7 +57,15 @@ const LoginPage = () => {
       </div>
 
       <div className='submitContainer'>
-        {insert ? <div className='button'>Log in</div> : ""}
+        {insert ? (
+          <div className='button'>
+            <Link to='/chat' className='button'>
+              Log in
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
         <div className='account-checker'>
           <div className='forgot'>
             <p>Forgot password?</p>

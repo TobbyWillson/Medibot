@@ -60,7 +60,15 @@ const SignupPage = () => {
         </div>
 
         <div className='submitContainer'>
-          {insert ? <div className='button'>{action}</div> : ""}
+          {insert ? (
+            <div className='button'>
+              <Link to='/login' className='button'>
+                {action}
+              </Link>
+            </div>
+          ) : (
+            ""
+          )}
           <div className='account-checker'>
             <div className='login'>
               <p>Already have an account?</p>

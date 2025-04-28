@@ -36,7 +36,7 @@ const ChatPage = () => {
           ) : (
             <div className='default-message'>
               <img src={robot} width={200} alt='' />
-              <p>How may I be of assistance today? </p>
+              <p>How may I be of assistance to you today? </p>
             </div>
           )}
         </div>

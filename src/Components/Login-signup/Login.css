@@ -106,6 +106,7 @@ body {
   border-radius: 25px;
   cursor: pointer;
   transition: transform 0.1s;
+  text-decoration: none;
 }
 
 .button:active {
@@ -247,10 +248,13 @@ span {
   flex-direction: column;
   text-align: center;
   align-items: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .home-container h1 {
-  font-size: 40px;
+  font-size: 45px;
+  font-weight: 580;
+  /* font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif; */
 }
 
 .home-container .robot {
@@ -285,11 +289,11 @@ span {
   justify-content: center;
   align-items: center;
   height: 40px;
-  width: 250px;
+  width: 180px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .home-container .get-started:hover {
@@ -373,7 +377,7 @@ span {
 }
 
 .chat-interface .text-message input {
-  width: 350px;
+  width: 240px;
   margin: 0 10px;
   background: none;
   color: rgb(233, 228, 228);
@@ -384,7 +388,7 @@ span {
 .text-message .text-comps {
   display: flex;
   align-items: center;
-  padding: 40px;
+  padding: 30px;
 }
 
 /* New Chat Interface */
@@ -405,4 +409,5 @@ span {
 
 .default-message p {
   font-size: 17px;
+  padding: 0 70px;
 }
