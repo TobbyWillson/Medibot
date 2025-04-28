@@ -327,7 +327,7 @@ span {
 
 .chat-interface .main-chat {
   display: grid;
-  gap: 10%;
+  gap: 5%;
 }
 
 .chat-interface .chatbody {
@@ -370,10 +370,10 @@ span {
   place-self: center;
   align-items: center;
   background-color: rgb(44, 43, 43);
-  height: 60px;
+  height: 55px;
   max-width: 450px;
   border-radius: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .chat-interface .text-message input {
