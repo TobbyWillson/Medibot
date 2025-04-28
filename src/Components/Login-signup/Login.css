@@ -258,7 +258,7 @@ span {
 }
 
 .home-container .robot {
-  margin: 50px 0;
+  margin: 45px 0;
   max-width: 200px;
 }
 
@@ -373,7 +373,7 @@ span {
   height: 60px;
   max-width: 450px;
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .chat-interface .text-message input {
