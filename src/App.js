@@ -4,14 +4,16 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./layouts/MainLayout";
-import HomePage from "./pages/HomePage";
+import Home from "./pages/Home";
+import Chat from "./pages/Chat";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route index element={<HomePage />} />
+      <Route index element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/chat' element={<Chat />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

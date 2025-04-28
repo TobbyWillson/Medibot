@@ -3,6 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: black;
 }
 
 .container {
@@ -16,6 +17,7 @@ body {
   box-shadow: 1px 1px 20px black;
   position: relative;
   user-select: none;
+  color: black;
 }
 
 .container-bg img {
@@ -197,6 +199,7 @@ span {
 }
 
 .notfound {
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,4 +238,171 @@ span {
 
 .goback:active {
   transform: scaleX(0.85);
+}
+
+/* Home Page Design */
+.home-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.home-container h1 {
+  font-size: 40px;
+}
+
+.home-container .robot {
+  margin: 50px 0;
+  max-width: 200px;
+}
+
+.home-container .version {
+  /* background-color: linear-gradient(rgb(62, 115, 228), rgb(16, 47, 221)); */
+  background: rgb(98, 98, 236);
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 60px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.home-container .welcome-message {
+  padding: 0 100px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.home-container .get-started {
+  background: rgb(98, 98, 236);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 250px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.home-container .get-started:hover {
+  background: rgb(42, 42, 233);
+}
+
+.home-container a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Chat Interface */
+
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.chat-interface .chat-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chat-interface .main-chat {
+  display: grid;
+  gap: 10%;
+}
+
+.chat-interface .chatbody {
+  display: grid;
+  gap: 20%;
+}
+
+.chat-interface .user-chat {
+  border-radius: 20px;
+  border-bottom-right-radius: 1px;
+
+  place-self: end;
+  background-color: rgb(106, 165, 221);
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+
+  padding: 15px 10px;
+  margin-left: 20%;
+  margin-right: 15px;
+}
+
+.chat-interface .ai-chat {
+  border-radius: 20px;
+  border-bottom-left-radius: 1px;
+
+  place-self: start;
+  background-color: rgb(85, 86, 87);
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 20%;
+  margin-left: 15px;
+  padding: 15px 10px;
+}
+
+.chat-interface .text-message {
+  display: flex;
+  justify-content: center;
+  place-self: center;
+  align-items: center;
+  background-color: rgb(44, 43, 43);
+  height: 60px;
+  max-width: 450px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.chat-interface .text-message input {
+  width: 350px;
+  margin: 0 10px;
+  background: none;
+  color: rgb(233, 228, 228);
+  border: none;
+  outline: none;
+}
+
+.text-message .text-comps {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+/* New Chat Interface */
+
+.default-message {
+  text-align: center;
+  font-weight: bold;
+}
+
+.default-message h1 {
+  font-size: 40px;
+}
+
+.default-message h2 {
+  color: rgb(88, 88, 221);
+  margin-bottom: 20px;
+}
+
+.default-message p {
+  font-size: 17px;
 }
