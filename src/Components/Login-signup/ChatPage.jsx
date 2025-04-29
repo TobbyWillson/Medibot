@@ -6,7 +6,9 @@ import robot from "../Assets/android-robot.png";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaEllipsis } from "react-icons/fa6";
 import { FaPlusCircle } from "react-icons/fa";
-import { FaArrowRightToBracket } from "react-icons/fa6";
+import { FaPaperclip } from "react-icons/fa6";
+import { FaRegPaperPlane } from "react-icons/fa6";
+import { FaPaperPlane } from "react-icons/fa";
 
 const ChatPage = () => {
   const [insert, setInsert] = useState("");
@@ -44,9 +46,9 @@ const ChatPage = () => {
 
       <div className='text-message'>
         <div className='text-comps'>
-          <FaPlusCircle />
+          <FaPaperclip />
           <input type='text' placeholder='Type your message...' onChange={insertMessage} />
-          <FaArrowRightToBracket />
+          <FaPaperPlane />
         </div>
       </div>
     </div>

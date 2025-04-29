@@ -1,6 +1,7 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import android from "../Assets/android-robot.png";
+import { FaStethoscope } from "react-icons/fa";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,23 @@ const HomePage = () => {
         <Link to='/login' className='get-started'>
           Get Started
         </Link>
+      </div>
+
+      {/* Desktop Version */}
+
+      <div className='desktop'>
+        <div className='desknav'>
+          <div className='deskleft'>
+            <FaStethoscope className='stethoscope' />
+            <h1>Medibot</h1>
+          </div>
+
+          <div className='deskright'>
+            <Link to='/login'>Login</Link>
+            <Link to='/signup'>Signup</Link>
+          </div>
+        </div>
+        <div className='underline'></div>
       </div>
     </div>
   );

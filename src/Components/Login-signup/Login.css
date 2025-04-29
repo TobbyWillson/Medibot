@@ -242,6 +242,7 @@ span {
 }
 
 /* Home Page Design */
+
 .home-container {
   color: white;
   display: flex;
@@ -249,6 +250,7 @@ span {
   text-align: center;
   align-items: center;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  height: 80vh;
 }
 
 .home-container h1 {
@@ -258,7 +260,7 @@ span {
 }
 
 .home-container .robot {
-  margin: 45px 0;
+  margin: 70px 0;
   max-width: 200px;
 }
 
@@ -284,7 +286,6 @@ span {
 
 .home-container .get-started {
   background: rgb(98, 98, 236);
-  margin-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -410,4 +411,65 @@ span {
 .default-message p {
   font-size: 17px;
   padding: 0 70px;
+}
+
+.desktop {
+  display: none;
+}
+
+/* Desktop Version */
+
+@media (min-width: 700px) {
+  .home-container {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+    height: 100vh;
+    width: 80vw;
+  }
+
+  .desknav .deskleft,
+  .desknav .deskright {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 20%;
+  }
+
+  .desktop .desknav {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .desknav .stethoscope {
+    font-size: 50px;
+  }
+
+  .deskleft,
+  .deskright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desknav h1 {
+    font-size: 20px;
+  }
+
+  .desknav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .desknav a:hover {
+    background-color: rgb(98, 98, 160);
+    padding: 5px 15px;
+    margin: 0 10px;
+    border-radius: 15px;
+  }
 }
