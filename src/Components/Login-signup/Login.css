@@ -114,7 +114,7 @@ body {
 }
 
 .button:hover {
-  background-color: rgba(0, 0, 0, 0.788);
+  background-color: rgb(133, 133, 190);
 }
 
 .submitContainer {
@@ -329,7 +329,8 @@ span {
   user-select: none;
 }
 
-.chat-interface .chat-nav .ellipsis {
+.chat-interface .chat-nav .ellipsis,
+.backbutton {
   font-size: 20px;
   cursor: pointer;
 }
@@ -343,7 +344,7 @@ span {
   background-color: rgb(109, 108, 108);
   padding: 7px 15px;
   border-radius: 10px;
-  border-top-right-radius: 1px;
+  border-top-right-radius: 0px;
 }
 
 .chat-interface .chat-nav .history:hover {
@@ -358,6 +359,7 @@ span {
 .chat-interface .chatbody {
   display: grid;
   gap: 20%;
+  width: 90vw;
 }
 
 .chat-interface .user-chat {

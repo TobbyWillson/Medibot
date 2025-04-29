@@ -7,8 +7,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaEllipsis } from "react-icons/fa6";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaPaperclip } from "react-icons/fa6";
-import { FaRegPaperPlane } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
+
+import { useNavigate } from "react-router-dom";
 
 const ChatPage = () => {
   const [insert, setInsert] = useState("");
@@ -23,10 +24,15 @@ const ChatPage = () => {
     setInsert(e.target.value);
   };
 
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className='chat-interface'>
       <div className='chat-nav'>
-        <FaArrowLeft />
+        <FaArrowLeft onClick={goBack} className='backbutton' />
         <p>Chat with Medibot</p>
         <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
         {showHistory && (
