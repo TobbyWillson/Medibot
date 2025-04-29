@@ -326,6 +326,7 @@ span {
   font-size: 14px;
   font-weight: 700;
   position: relative;
+  user-select: none;
 }
 
 .chat-interface .chat-nav .ellipsis {
@@ -343,7 +344,6 @@ span {
   padding: 7px 15px;
   border-radius: 10px;
   border-top-right-radius: 1px;
-  user-select: none;
 }
 
 .chat-interface .chat-nav .history:hover {
