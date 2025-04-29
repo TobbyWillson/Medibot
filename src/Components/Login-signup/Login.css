@@ -260,7 +260,8 @@ span {
 }
 
 .home-container .robot {
-  margin: 70px 0;
+  margin-top: 70px;
+  margin-bottom: 30px;
   max-width: 200px;
 }
 
