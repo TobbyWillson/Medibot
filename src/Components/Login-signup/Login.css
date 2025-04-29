@@ -325,6 +325,29 @@ span {
   margin-bottom: 30px;
   font-size: 14px;
   font-weight: 700;
+  position: relative;
+}
+
+.chat-interface .chat-nav .ellipsis {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chat-interface .chat-nav .history {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(109, 108, 108);
+  padding: 7px 15px;
+  border-radius: 10px;
+  border-top-right-radius: 1px;
+  user-select: none;
+}
+
+.chat-interface .chat-nav .history:hover {
+  background-color: rgb(133, 133, 190);
 }
 
 .chat-interface .main-chat {

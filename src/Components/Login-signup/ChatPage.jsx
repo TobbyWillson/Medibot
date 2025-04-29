@@ -13,6 +13,12 @@ import { FaPaperPlane } from "react-icons/fa";
 const ChatPage = () => {
   const [insert, setInsert] = useState("");
 
+  const [showHistory, setShowHistory] = useState(false);
+
+  const toggleVisibility = () => {
+    setShowHistory(!showHistory);
+  };
+
   const insertMessage = (e) => {
     setInsert(e.target.value);
   };
@@ -22,7 +28,12 @@ const ChatPage = () => {
       <div className='chat-nav'>
         <FaArrowLeft />
         <p>Chat with Medibot</p>
-        <FaEllipsis />
+        <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
+        {showHistory && (
+          <Link to='/history' className='history'>
+            History
+          </Link>
+        )}
       </div>
 
       <div className='chatbody'>
