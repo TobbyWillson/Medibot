@@ -1,28 +1,39 @@
 import "./Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import robot from "../Assets/android-robot.png";
 
-import { FaArrowLeft } from "react-icons/fa";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaEllipsis } from "react-icons/fa6";
-import { FaPlusCircle } from "react-icons/fa";
-import { FaPaperclip } from "react-icons/fa6";
-import { FaPaperPlane } from "react-icons/fa";
+
+import { BsPaperclip } from "react-icons/bs";
+import { VscSend } from "react-icons/vsc";
 
 import { useNavigate } from "react-router-dom";
 
 const ChatPage = () => {
   const [insert, setInsert] = useState("");
-
-  const [showHistory, setShowHistory] = useState(false);
-
-  const toggleVisibility = () => {
-    setShowHistory(!showHistory);
-  };
-
   const insertMessage = (e) => {
     setInsert(e.target.value);
   };
+
+  const [showHistory, setShowHistory] = useState(false);
+
+  const toggleVisibility = (e) => {
+    e.stopPropagation();
+    setShowHistory(!showHistory);
+  };
+
+  const closeHistory = () => {
+    setShowHistory(showHistory);
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", closeHistory);
+    return () => {
+      document.body.removeEventListener("click", closeHistory);
+    };
+  }, []);
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -32,7 +43,7 @@ const ChatPage = () => {
   return (
     <div className='chat-interface'>
       <div className='chat-nav'>
-        <FaArrowLeft onClick={goBack} className='backbutton' />
+        <FaLongArrowAltLeft onClick={goBack} className='backbutton' />
         <p>Chat with Medibot</p>
         <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
         {showHistory && (
@@ -63,9 +74,9 @@ const ChatPage = () => {
 
       <div className='text-message'>
         <div className='text-comps'>
-          <FaPaperclip />
-          <input type='text' placeholder='Type your message...' onChange={insertMessage} />
-          <FaPaperPlane />
+          <BsPaperclip className='message-icon' />
+          <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
+          <VscSend className='message-icon' />
         </div>
       </div>
     </div>

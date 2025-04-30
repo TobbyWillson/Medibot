@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
+import History from "./pages/History";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/chat' element={<Chat />} />
+      <Route path='/history' element={<History />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

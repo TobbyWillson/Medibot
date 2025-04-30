@@ -314,6 +314,7 @@ span {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  position: relative;
 }
 
 .chat-interface .chat-nav {
@@ -417,9 +418,14 @@ span {
   padding: 30px;
 }
 
+.text-message .text-comps .message-icon {
+  font-size: 20px;
+}
+
 /* New Chat Interface */
 
 .default-message {
+  user-select: none;
   text-align: center;
   font-weight: bold;
 }
@@ -442,7 +448,94 @@ span {
   display: none;
 }
 
+/* CHAT HISTORY */
+
+.history-container {
+  height: 100vh;
+  width: 90vw;
+}
+
+.history-container .heading {
+  margin: 30px auto;
+  /* position: fixed; */
+}
+
+.history-container .details-section {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.history-container .history-details .each-history {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(29, 29, 29);
+  padding: 12px 10px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  border: rgb(70, 69, 69) solid 1px;
+  cursor: pointer;
+}
+
+.history-container .history-details .each-history:hover {
+  transition: all 0.3s;
+  transform: scale(0.99);
+}
+
+.history-details .message-icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.history-details .arrow-icon {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.history-container .history-footer {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: solid 1px rgb(70, 69, 69);
+
+  padding-top: 1px;
+  border-radius: 10px;
+}
+
+.history-container .history-footer .history-section,
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.history-footer .history-section {
+  background-color: rgb(15, 15, 15);
+  padding: 15px 50px;
+  border-radius: 10px;
+}
+.history-footer .chat-section {
+  padding: 15px 50px;
+}
+
+.history-footer .footer-icon {
+  font-size: 25px;
+  /* padding-bottom: 5px; */
+  margin-bottom: 5px;
+}
+
 /* Desktop Version */
+@media (max-width: 850px) {
+  .desknav .stethoscope {
+    display: none;
+  }
+}
 
 @media (min-width: 670px) {
   .home-container {
@@ -471,7 +564,6 @@ span {
 
   .desknav .stethoscope {
     font-size: 50px;
-    margin-right: 10px;
   }
 
   .deskleft,
@@ -504,7 +596,7 @@ span {
     width: 100%;
 
     place-self: center;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 
   .desktop .screen-content {
