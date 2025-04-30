@@ -489,11 +489,13 @@ span {
 .history-details .message-icon {
   font-size: 30px;
   margin-right: 10px;
+  color: rgb(175, 177, 179);
 }
 
 .history-details .arrow-icon {
   font-size: 25px;
   margin-left: 10px;
+  color: rgb(175, 177, 179);
 }
 
 .history-container .history-footer {
@@ -516,7 +518,7 @@ span {
 }
 
 .history-footer .history-section {
-  background-color: rgb(15, 15, 15);
+  background-color: rgb(29, 29, 29);
   padding: 15px 50px;
   border-radius: 10px;
 }
