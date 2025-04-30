@@ -41,7 +41,7 @@ const HistoryPage = () => {
             <div className='each-history'>
               <MdMessage className='message-icon' />
 
-              {history.text.substring(0, 25) + "..."}
+              {history.text.substring(0, 29) + "..."}
               <FaLongArrowAltRight className='arrow-icon' />
             </div>
           ))}

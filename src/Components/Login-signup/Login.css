@@ -456,7 +456,8 @@ span {
 }
 
 .history-container .heading {
-  margin: 30px auto;
+  margin-top: 30px;
+  margin-bottom: 18px;
   /* position: fixed; */
 }
 
@@ -472,8 +473,8 @@ span {
   align-items: center;
   justify-content: space-between;
   background-color: rgb(29, 29, 29);
-  padding: 12px 10px;
-  margin-bottom: 12px;
+  padding: 10px 10px;
+  margin-bottom: 8px;
   border-radius: 10px;
   font-size: 15px;
   font-weight: bold;
