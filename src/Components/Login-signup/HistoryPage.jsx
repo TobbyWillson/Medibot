@@ -97,29 +97,21 @@ const HistoryPage = () => {
             <div className='each-history'>
               <MdMessage className='message-icon' />
 
-              {history.text.substring(0, 29) + "..."}
-              <FaLongArrowAltRight className='arrow-icon' />
+              {history.text.substring(0, 55) + "..."}
+              {/* <FaLongArrowAltRight className='arrow-icon' /> */}
             </div>
           ))}
         </div>
 
         <div className='history-footer'>
           <div className='history-section'>
-            <>
-              <FaHistory className='footer-icon' />
-            </>
-            <>
-              <p>History</p>
-            </>
+            <FaHistory className='footer-icon' />
+            <p>History</p>
           </div>
           <div className='vertical-line'></div>
           <div className='chat-section' onClick={goBack}>
-            <>
-              <IoChatbubbleEllipsesOutline className='footer-icon' />
-            </>
-            <>
-              <p>Chat</p>
-            </>
+            <IoChatbubbleEllipsesOutline className='footer-icon' />
+            <p>Chat</p>
           </div>
         </div>
       </div>

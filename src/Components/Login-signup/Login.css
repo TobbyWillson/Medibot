@@ -366,7 +366,7 @@ span {
 
 .chat-interface .chatbody .user-ai {
   padding-top: 50px;
-  padding-bottom: 15%;
+  padding-bottom: 17%;
 }
 
 .chat-interface .user-chat {
@@ -467,7 +467,7 @@ span {
 
 .history-container .heading {
   background-color: black;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   padding-top: 10px;
   padding-left: 20px;
   font-size: 25px;
@@ -488,13 +488,14 @@ span {
 
 .history-container .history-details {
   padding-top: 50px;
-  padding-bottom: 11%;
+  padding-bottom: 13%;
 }
 
 .history-container .history-details .each-history {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: ; */
+  /* text-align: start; */
   background-color: rgb(29, 29, 29);
   padding: 5px 10px;
   margin-bottom: 8px;
@@ -512,7 +513,7 @@ span {
 
 .history-details .message-icon {
   font-size: 30px;
-  margin-right: 2px;
+  margin-right: 10px;
   color: rgb(157, 158, 158);
 }
 
