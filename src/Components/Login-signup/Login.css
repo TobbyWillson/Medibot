@@ -458,9 +458,9 @@ span {
 .history-container .heading {
   background-color: black;
   padding-bottom: 20px;
-  padding-top: 3px;
+  padding-top: 10px;
   padding-left: 20px;
-  font-size: 28px;
+  font-size: 25px;
   position: fixed;
   top: 0;
   left: 0;
@@ -470,7 +470,9 @@ span {
 }
 
 .history-container .details-section {
-  height: 60vh;
+  height: 50vh;
+  /* margin-top: 60px; */
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
