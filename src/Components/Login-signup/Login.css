@@ -456,17 +456,25 @@ span {
 }
 
 .history-container .heading {
-  margin-top: 30px;
-  margin-bottom: 18px;
+  background-color: black;
+  padding-bottom: 20px;
+  padding-top: 3px;
+  padding-left: 20px;
   font-size: 28px;
-  /* position: fixed; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
 }
 
 .history-container .details-section {
-  height: 80vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 10px 0;
 }
 
 .history-container .history-details .each-history {
@@ -501,18 +509,26 @@ span {
 }
 
 .history-container .history-footer {
+  background-color: black;
   display: flex;
   justify-content: space-evenly;
   border-top: solid 1px rgb(70, 69, 69);
 
-  padding-top: 1px;
+  /* padding-top: 1px; */
   border-radius: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 55px;
+  width: 100%;
+  z-index: 1000;
 }
 
 .history-container .history-footer .history-section,
 .chat-section {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  /* justify-content: space-evenly; */
   align-items: center;
   font-size: 14px;
   font-weight: 600;
@@ -530,7 +546,7 @@ span {
 
 .history-footer .footer-icon {
   font-size: 25px;
-  /* padding-bottom: 5px; */
+  padding-right: 5px;
   margin-bottom: 5px;
 }
 

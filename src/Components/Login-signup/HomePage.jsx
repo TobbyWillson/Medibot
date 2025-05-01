@@ -40,7 +40,9 @@ const HomePage = () => {
 
           <div className='others'>
             <h1>Meet Your New AI Companion</h1>
-            <p>A chatbot that specializes in analyzing, diagonising and giving medical attentions to users based on inputs. Get in touch today!</p>
+            {/* <p>A chatbot that specializes in analyzing, diagonising and giving medical attentions to users based on inputs. Get in touch today!</p> */}
+
+            <p>Welcome to Medibot, your trusted digital health companion. Our AI-powered chatbot is designed to provide you with accurate and personalized health information, support, and guidance. </p>
             <p className='version'>v1.0</p>
             <p className='welcome-message'>It is a pleasure to meet you! How can I assist you today?</p>
             <Link to='/login' className='get-started'>
