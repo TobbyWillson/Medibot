@@ -105,13 +105,21 @@ const HistoryPage = () => {
 
         <div className='history-footer'>
           <div className='history-section'>
-            <FaHistory className='footer-icon' />
-            History
+            <>
+              <FaHistory className='footer-icon' />
+            </>
+            <>
+              <p>History</p>
+            </>
           </div>
-
+          <div className='vertical-line'></div>
           <div className='chat-section' onClick={goBack}>
-            <IoChatbubbleEllipsesOutline className='footer-icon' />
-            Chat
+            <>
+              <IoChatbubbleEllipsesOutline className='footer-icon' />
+            </>
+            <>
+              <p>Chat</p>
+            </>
           </div>
         </div>
       </div>
