@@ -4,6 +4,7 @@ body {
   align-items: center;
   position: relative;
   background-color: black;
+  min-height: 100vh;
 }
 
 .container {
@@ -307,29 +308,29 @@ span {
   color: white;
 }
 
-/* Chat Interface */
+/* -------- Main chat interface -------- */
 
 .chat-interface {
+  height: 100vh;
+  width: 95vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
-  position: relative;
+  align-items: center;
 }
 
 .chat-interface .chat-nav {
+  width: 90vw;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
-  /* margin-top: 25px; */
-  /* margin-bottom: 20px; */
+  padding: 0 30px;
+
   font-size: 14px;
   font-weight: 700;
   position: relative;
   user-select: none;
-  background-color: black;
-  /* height: 20px; */
 
   position: fixed;
   top: 0;
@@ -337,6 +338,8 @@ span {
   width: 100%;
   height: 50px;
   z-index: 1000;
+
+  background-color: black;
 }
 
 .chat-interface .chat-nav .ellipsis,
@@ -348,7 +351,7 @@ span {
 .chat-interface .chat-nav .history {
   position: absolute;
   top: 30px;
-  right: 30px;
+  right: 25px;
   text-decoration: none;
   color: white;
   background-color: rgb(109, 108, 108);
@@ -361,15 +364,9 @@ span {
   background-color: rgb(133, 133, 190);
 }
 
-.chat-interface .main-chat {
-  display: grid;
-  gap: 0.7%;
-}
-
-.chat-interface .chatbody {
-  padding-top: 60px;
-  /* margin-bottom: 20px; */
-  height: 70px;
+.chat-interface .chatbody .user-ai {
+  padding-top: 50px;
+  padding-bottom: 15%;
 }
 
 .chat-interface .user-chat {
@@ -377,7 +374,7 @@ span {
   border-bottom-right-radius: 1px;
 
   place-self: end;
-  background-color: rgb(106, 165, 221);
+  background-color: rgb(106, 162, 214);
   color: black;
   font-size: 16px;
   font-weight: bold;
@@ -385,7 +382,7 @@ span {
   padding: 15px 10px;
   margin-left: 30px;
   margin-right: 15px;
-  /* margin-bottom: -40px; */
+  margin-top: 7px;
 }
 
 .chat-interface .ai-chat {
@@ -394,22 +391,42 @@ span {
 
   place-self: start;
   background-color: rgb(85, 86, 87);
-  color: rgb(255, 255, 255);
+  color: rgb(223, 223, 223);
   font-size: 16px;
   font-weight: bold;
   margin-right: 30px;
   margin-left: 15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
   padding: 15px 10px;
-
-  /* margin-bottom: -40px; */
 }
 
-.chat-interface .text-message {
+.chat-interface .text-message input {
+  width: 340px;
+  margin: 0 10px;
+  background: none;
+  color: rgb(214, 214, 214);
+  border: none;
+  outline: none;
+}
+
+.chat-interface .inputbox-bg .text-message {
+  background-color: rgb(248, 248, 248);
+  padding: 100px 0;
+  height: 100px;
+}
+
+.text-message .text-comps {
   display: flex;
-  justify-content: center;
-  place-self: center;
   align-items: center;
-  background-color: black;
+  justify-content: space-between;
+  padding: 30px;
+
+  background-color: rgb(44, 43, 43);
+  height: 55px;
+  width: 95vw;
+  border-radius: 20px;
+  /* margin-bottom: 10px; */
 
   position: fixed;
   bottom: 0;
@@ -419,46 +436,21 @@ span {
   z-index: 1000;
 }
 
-.chat-interface .text-message input {
-  width: 240px;
-  margin: 0 10px;
-  background: none;
-  color: rgb(233, 228, 228);
-  border: none;
-  outline: none;
-}
-
-.text-message .text-comps {
-  display: flex;
-  align-items: center;
-  padding: 30px;
-
-  background-color: rgb(44, 43, 43);
-  height: 55px;
-  max-width: 450px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
-
 .text-message .text-comps .message-icon {
   font-size: 20px;
 }
 
-/* New Chat Interface */
+/* Default chat */
 
 .default-message {
-  user-select: none;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   text-align: center;
   font-weight: bold;
-}
-
-.default-message h1 {
-  font-size: 40px;
-}
-
-.default-message h2 {
-  color: rgb(88, 88, 221);
-  margin-bottom: 20px;
 }
 
 .default-message p {
@@ -466,112 +458,12 @@ span {
   padding: 0 70px;
 }
 
-.desktop {
-  display: none;
-}
+/* ----------- New Chat Interface ---------- */
 
 /* CHAT HISTORY */
 
-.history-container {
-  height: 100vh;
-  width: 90vw;
-}
-
-.history-container .heading {
-  background-color: black;
-  padding-bottom: 20px;
-  padding-top: 10px;
-  padding-left: 20px;
-  font-size: 25px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  z-index: 1000;
-}
-
-.history-container .details-section {
-  height: 50vh;
-  /* margin-top: 60px; */
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-
-.history-container .history-details .each-history {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgb(29, 29, 29);
-  padding: 5px 10px;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  border: rgb(70, 69, 69) solid 1px;
-  cursor: pointer;
-}
-
-.history-container .history-details .each-history:hover {
-  transition: all 0.3s;
-  transform: scale(0.99);
-}
-
-.history-details .message-icon {
-  font-size: 30px;
-  margin-right: 2px;
-  color: rgb(157, 158, 158);
-}
-
-.history-details .arrow-icon {
-  font-size: 25px;
-  /* margin-left: 10px; */
-  color: rgb(157, 158, 158);
-}
-
-.history-container .history-footer {
-  background-color: black;
-  display: flex;
-  justify-content: space-evenly;
-  border-top: solid 1px rgb(70, 69, 69);
-
-  /* padding-top: 1px; */
-  border-radius: 10px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 55px;
-  width: 100%;
-  z-index: 1000;
-}
-
-.history-container .history-footer .history-section,
-.chat-section {
-  display: flex;
-  /* flex-direction: column; */
-  /* justify-content: space-evenly; */
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.history-footer .history-section {
-  background-color: rgb(29, 29, 29);
-  padding: 15px 50px;
-  border-radius: 10px;
-}
-.history-footer .chat-section {
-  padding: 15px 50px;
-}
-
-.history-footer .footer-icon {
-  font-size: 25px;
-  padding-right: 5px;
-  margin-bottom: 5px;
+.desktop {
+  display: none;
 }
 
 /* Desktop Version */

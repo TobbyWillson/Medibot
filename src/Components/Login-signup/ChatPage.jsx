@@ -43,9 +43,15 @@ const ChatPage = () => {
   return (
     <div className='chat-interface'>
       <div className='chat-nav'>
-        <FaLongArrowAltLeft onClick={goBack} className='backbutton' />
-        <p>Chat with Medibot</p>
-        <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
+        <div>
+          <FaLongArrowAltLeft onClick={goBack} className='backbutton' />
+        </div>
+        <div>
+          <p>Chat with Medibot</p>
+        </div>
+        <div>
+          <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
+        </div>
         {showHistory && (
           <Link to='/history' className='history'>
             History
@@ -56,7 +62,7 @@ const ChatPage = () => {
       <div className='chatbody'>
         <div className='main-chat'>
           {insert ? (
-            <>
+            <div className='user-ai'>
               <div className='user-chat'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad beatae minima corrupti repellendus ! </div>
               <div className='ai-chat'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam aliquam magni, voluptatum optio ea et molestiae unde! In optio dolor commodi totam molestias, asperiores nobis
@@ -71,8 +77,18 @@ const ChatPage = () => {
 
               <div className='user-chat'>Lorem ipsum, dolor ellendus ! </div>
               <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
               <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-            </>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
+              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
+              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at lquam</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at um dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius a lquam</div>
+            </div>
           ) : (
             <div className='default-message'>
               <img src={robot} width={200} alt='' />
@@ -82,11 +98,13 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className='text-message'>
-        <div className='text-comps'>
-          <BsPaperclip className='message-icon' />
-          <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
-          <VscSend className='message-icon' />
+      <div className='inputbox-bg'>
+        <div className='text-message'>
+          <div className='text-comps'>
+            <BsPaperclip className='message-icon' />
+            <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
+            <VscSend className='message-icon' />
+          </div>
         </div>
       </div>
     </div>
