@@ -500,13 +500,13 @@ span {
 
 .history-details .message-icon {
   font-size: 30px;
-  margin-right: 10px;
+  margin-right: 2px;
   color: rgb(175, 177, 179);
 }
 
 .history-details .arrow-icon {
   font-size: 25px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   color: rgb(175, 177, 179);
 }
 
