@@ -437,7 +437,7 @@ span {
 }
 
 .text-message .text-comps .message-icon {
-  font-size: 20px;
+  font-size: 30px;
 }
 
 /* Default chat */
@@ -488,7 +488,7 @@ span {
 
 .history-container .history-details {
   padding-top: 50px;
-  padding-bottom: 13%;
+  padding-bottom: 15%;
 }
 
 .history-container .history-details .each-history {
