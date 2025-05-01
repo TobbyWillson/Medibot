@@ -321,9 +321,9 @@ span {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 20px;
+  padding: 20px 20px;
   /* margin-top: 25px; */
-  margin-bottom: 30px;
+  /* margin-bottom: 20px; */
   font-size: 14px;
   font-weight: 700;
   position: relative;
@@ -367,7 +367,7 @@ span {
 }
 
 .chat-interface .chatbody {
-  padding-top: 90px;
+  padding-top: 70px;
   /* margin-bottom: 20px; */
   height: 70px;
 }
@@ -410,7 +410,6 @@ span {
   place-self: center;
   align-items: center;
   background-color: black;
-  height: 20px;
 
   position: fixed;
   bottom: 0;
@@ -438,7 +437,7 @@ span {
   height: 55px;
   max-width: 450px;
   border-radius: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
 
 .text-message .text-comps .message-icon {
