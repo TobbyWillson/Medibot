@@ -62,6 +62,16 @@ const ChatPage = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam aliquam magni, voluptatum optio ea et molestiae unde! In optio dolor commodi totam molestias, asperiores nobis
                 debitis aspernatur quia fuga sint voluptatem doloremque cupiditate quam unde! Eos, officiis enim? Obcaecati unde blanditiis officiis aspernatur voluptates distinctio atque dolore?
               </div>
+
+              <div className='user-chat'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad beatae minima corrupti repellendus ! </div>
+              <div className='ai-chat'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam aliquam magni, voluptatum optio ea et molestiae unde! In optio dolor commodi totam molestias, asperiores nobis
+                debitis aspernatur quia fuga sint voluptatem doloremque cupiditate quam unde! Eos, officiis enim? Obcaecati unde blanditiis officiis aspernatur voluptates distinctio atque dolore?
+              </div>
+
+              <div className='user-chat'>Lorem ipsum, dolor ellendus ! </div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
+              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
             </>
           ) : (
             <div className='default-message'>

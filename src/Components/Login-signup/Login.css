@@ -321,13 +321,22 @@ span {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  margin-top: 25px;
+  padding: 40px 20px;
+  /* margin-top: 25px; */
   margin-bottom: 30px;
   font-size: 14px;
   font-weight: 700;
   position: relative;
   user-select: none;
+  background-color: black;
+  /* height: 20px; */
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
 }
 
 .chat-interface .chat-nav .ellipsis,
@@ -354,12 +363,13 @@ span {
 
 .chat-interface .main-chat {
   display: grid;
-  gap: 5%;
+  gap: 1%;
 }
 
 .chat-interface .chatbody {
-  display: grid;
-  gap: 20%;
+  padding-top: 90px;
+  /* margin-bottom: 20px; */
+  height: 70px;
 }
 
 .chat-interface .user-chat {
@@ -373,8 +383,9 @@ span {
   font-weight: bold;
 
   padding: 15px 10px;
-  margin-left: 20%;
+  margin-left: 30px;
   margin-right: 15px;
+  /* margin-bottom: -40px; */
 }
 
 .chat-interface .ai-chat {
@@ -386,9 +397,11 @@ span {
   color: rgb(255, 255, 255);
   font-size: 16px;
   font-weight: bold;
-  margin-right: 20%;
+  margin-right: 30px;
   margin-left: 15px;
   padding: 15px 10px;
+
+  /* margin-bottom: -40px; */
 }
 
 .chat-interface .text-message {
@@ -396,11 +409,15 @@ span {
   justify-content: center;
   place-self: center;
   align-items: center;
-  background-color: rgb(44, 43, 43);
+  background-color: black;
+  height: 20px;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
   height: 55px;
-  max-width: 450px;
-  border-radius: 20px;
-  margin-bottom: 60px;
+  width: 100%;
+  z-index: 1000;
 }
 
 .chat-interface .text-message input {
@@ -416,6 +433,12 @@ span {
   display: flex;
   align-items: center;
   padding: 30px;
+
+  background-color: rgb(44, 43, 43);
+  height: 55px;
+  max-width: 450px;
+  border-radius: 20px;
+  margin-bottom: 60px;
 }
 
 .text-message .text-comps .message-icon {
@@ -501,13 +524,13 @@ span {
 .history-details .message-icon {
   font-size: 30px;
   margin-right: 2px;
-  color: rgb(175, 177, 179);
+  color: rgb(157, 158, 158);
 }
 
 .history-details .arrow-icon {
   font-size: 25px;
   /* margin-left: 10px; */
-  color: rgb(175, 177, 179);
+  color: rgb(157, 158, 158);
 }
 
 .history-container .history-footer {
