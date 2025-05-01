@@ -347,7 +347,7 @@ span {
 
 .chat-interface .chat-nav .history {
   position: absolute;
-  top: 20px;
+  top: 30px;
   right: 30px;
   text-decoration: none;
   color: white;
@@ -363,11 +363,11 @@ span {
 
 .chat-interface .main-chat {
   display: grid;
-  gap: 1%;
+  gap: 0.7%;
 }
 
 .chat-interface .chatbody {
-  padding-top: 70px;
+  padding-top: 60px;
   /* margin-bottom: 20px; */
   height: 70px;
 }
