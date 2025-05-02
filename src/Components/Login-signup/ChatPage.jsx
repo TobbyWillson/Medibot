@@ -57,17 +57,15 @@ const ChatPage = () => {
   const toggleSearchBar = (e) => {
     e.stopPropagation();
     setShowSearchBar(!showSearchBar);
-    handleCloseSearch();
   };
 
-  const handleCloseSearch = () => {
-    setSearchQuery("");
-  };
+  // const handleCloseSearch = () => {
+  //   setSearchQuery("");
+  // };
 
   const closeSearchBar = (e) => {
     if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
       setShowSearchBar(false);
-      handleCloseSearch();
     }
   };
 
@@ -80,6 +78,9 @@ const ChatPage = () => {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
+  };
+  const handleCloseSearchQuery = (e) => {
+    setSearchQuery("");
   };
   const highlightText = (text) => {
     if (!searchQuery) return text;
@@ -226,8 +227,8 @@ const ChatPage = () => {
               <FaTimes
                 className='close'
                 onClick={() => {
-                  setShowSearchBar(false);
-                  handleCloseSearch();
+                  // setShowSearchBar(false);
+                  handleCloseSearchQuery();
                 }}
               />
             </div>

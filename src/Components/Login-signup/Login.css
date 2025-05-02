@@ -388,7 +388,7 @@ span {
 
 .chat-interface .search-bar .close {
   cursor: pointer;
-  color: rgb(248, 65, 65);
+  color: rgb(204, 67, 67);
 }
 
 .chat-interface .search-bar input {
@@ -947,6 +947,14 @@ span {
   .screen-content a {
     text-decoration: none;
     color: white;
+  }
+
+  .chat-interface .main-chat {
+    width: 90vw;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    left: 40%;
   }
 }
 
