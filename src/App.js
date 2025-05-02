@@ -7,6 +7,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import History from "./pages/History";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<Signup />} />
       <Route path='/chat' element={<Chat />} />
       <Route path='/history' element={<History />} />
+      <Route path='/search' element={<Search />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

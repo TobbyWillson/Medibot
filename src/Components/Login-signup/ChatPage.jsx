@@ -8,6 +8,9 @@ import { FaEllipsis } from "react-icons/fa6";
 
 import { BsPaperclip } from "react-icons/bs";
 import { VscSend } from "react-icons/vsc";
+import { ImSearch } from "react-icons/im";
+
+import { MdMessage } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
 
@@ -40,70 +43,163 @@ const ChatPage = () => {
     navigate(-1);
   };
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const substringLength = screenWidth <= 370 ? 31 : screenWidth <= 450 ? 36 : screenWidth <= 570 ? 55 : screenWidth <= 730 ? 70 : 70;
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const histories = [
+    {
+      id: 1,
+      text: "How do I feel when I have headache? I really do not know what is going on with me",
+    },
+
+    {
+      id: 2,
+      text: "What are the common symptoms of hypothyroidism and how is it treated?",
+    },
+
+    {
+      id: 3,
+      text: "Can you explain the causes and effects of high blood pressure on the body?",
+    },
+    {
+      id: 4,
+      text: "How do I manage stress and anxiety during a pandemic lockdown period?",
+    },
+    {
+      id: 5,
+      text: "What are the potential side effects of taking antidepressant medication long term?",
+    },
+    {
+      id: 6,
+      text: "Can you describe the symptoms and treatment options for a urinary tract infection?",
+    },
+    {
+      id: 7,
+      text: "How does a healthy diet and regular exercise impact mental health and wellbeing?",
+    },
+    {
+      id: 8,
+      text: "What are the differences between type 1 and type 2 diabetes mellitus?",
+    },
+    {
+      id: 9,
+      text: "Can you provide information on the causes and symptoms of fibromyalgia syndrome?",
+    },
+    {
+      id: 10,
+      text: "How do I recognize the warning signs of a heart attack and what to do?",
+    },
+    {
+      id: 11,
+      text: "What are the benefits and risks of getting vaccinated against COVID-19?",
+    },
+    {
+      id: 12,
+      text: "Can you explain the process of diagnosing and treating a concussion?",
+    },
+    {
+      id: 13,
+      text: "How do I cope with chronic pain and improve my quality of life?",
+    },
+    {
+      id: 14,
+      text: "What are the common triggers and symptoms of asthma and how is it managed?",
+    },
+    {
+      id: 16,
+      text: "Can you describe the symptoms and treatment options for a migraine headache?",
+    },
+    {
+      id: 17,
+      text: "How do I prevent and manage osteoporosis and maintain strong bones?",
+    },
+    {
+      id: 18,
+      text: "How do I cope with chronic pain and improve my quality of life?",
+    },
+  ];
+
+  const messages = [
+    { id: 1, text: "Hello, how are you?", sender: "user" },
+    { id: 2, text: "I am good, thanks! How can I assist you today?", sender: "ai" },
+    { id: 3, text: "I need help with a coding issue.", sender: "user" },
+    { id: 4, text: "What seems to be the issue? Please provide more details.", sender: "ai" },
+    { id: 5, text: "I am getting an error when trying to compile my code.", sender: "user" },
+    { id: 6, text: "Can you please share the error message and the code snippet that is causing the issue?", sender: "ai" },
+  ];
+
   return (
     <div className='chat-interface'>
-      <div className='chat-nav'>
-        <div>
-          <FaLongArrowAltLeft onClick={goBack} className='backbutton' />
+      {/* Desktop Version */}
+      <div className='history-container'>
+        <h1 className='heading'>History</h1>
+
+        <div className='details-section'>
+          <div className='history-details'>
+            {histories.map((history) => (
+              <div className='each-history'>
+                <MdMessage className='message-icon' />
+
+                {history.text.substring(0, substringLength) + "..."}
+                {/* <FaLongArrowAltRight className='arrow-icon' /> */}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
-          <p>Chat with Medibot</p>
-        </div>
-        <div>
-          <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
-        </div>
-        {showHistory && (
-          <Link to='/history' className='history'>
-            History
-          </Link>
-        )}
       </div>
 
-      <div className='chatbody'>
-        <div className='main-chat'>
-          {insert ? (
-            <div className='user-ai'>
-              <div className='user-chat'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad beatae minima corrupti repellendus ! </div>
-              <div className='ai-chat'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam aliquam magni, voluptatum optio ea et molestiae unde! In optio dolor commodi totam molestias, asperiores nobis
-                debitis aspernatur quia fuga sint voluptatem doloremque cupiditate quam unde! Eos, officiis enim? Obcaecati unde blanditiis officiis aspernatur voluptates distinctio atque dolore?
-              </div>
-
-              <div className='user-chat'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad beatae minima corrupti repellendus ! </div>
-              <div className='ai-chat'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam aliquam magni, voluptatum optio ea et molestiae unde! In optio dolor commodi totam molestias, asperiores nobis
-                debitis aspernatur quia fuga sint voluptatem doloremque cupiditate quam unde! Eos, officiis enim? Obcaecati unde blanditiis officiis aspernatur voluptates distinctio atque dolore?
-              </div>
-
-              <div className='user-chat'>Lorem ipsum, dolor ellendus ! </div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
-              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam lasr</div>
-              <div className='user-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at laudantium nam voluptate excepturi dignissimos qui exercitationem ullam numquam</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at lquam</div>
-              <div className='ai-chat'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius at um dolor sit amet consectetur adipisicing elit. Dolorum recusandae itaque eius a lquam</div>
-            </div>
-          ) : (
-            <div className='default-message'>
-              <img src={robot} width={200} alt='' />
-              <p>How may I be of assistance to you today? </p>
-            </div>
+      <div className='overall-chat'>
+        <div className='chat-nav'>
+          <div>
+            <FaLongArrowAltLeft onClick={goBack} className='backbutton' />
+          </div>
+          <div>
+            <p>Chat with Medibot</p>
+          </div>
+          <div>
+            <FaEllipsis onClick={toggleVisibility} className='ellipsis' />
+          </div>
+          {showHistory && (
+            <Link to='/history' className='history'>
+              History
+            </Link>
           )}
         </div>
-      </div>
 
-      <div className='inputbox-bg'>
-        <div className='text-message'>
-          <div className='text-comps'>
-            <BsPaperclip className='message-icon' />
-            <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
-            <VscSend className='message-icon' />
+        <div className='chatbody'>
+          <div className='main-chat'>
+            {insert ? (
+              <div className='user-ai'>
+                {messages.map((message) => (
+                  <div key={message.id} className={message.sender === "user" ? "user-chat" : "ai-chat"}>
+                    {message.text}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className='default-message'>
+                <img src={robot} width={200} alt='' />
+                <p>How may I be of assistance to you today? </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className='inputbox-bg'>
+          <div className='text-message'>
+            <div className='text-comps'>
+              <ImSearch className='message-icon search' />
+              <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
+              <VscSend className='message-icon' />
+            </div>
           </div>
         </div>
       </div>

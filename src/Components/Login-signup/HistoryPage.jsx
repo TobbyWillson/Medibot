@@ -7,6 +7,7 @@ import { FaHistory } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const histories = [
   {
@@ -87,6 +88,17 @@ const HistoryPage = () => {
     navigate(-1);
   };
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const substringLength = screenWidth <= 370 ? 31 : screenWidth <= 450 ? 36 : screenWidth <= 570 ? 55 : screenWidth <= 730 ? 70 : 70;
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className='history-container'>
       <h1 className='heading'>History</h1>
@@ -97,7 +109,7 @@ const HistoryPage = () => {
             <div className='each-history'>
               <MdMessage className='message-icon' />
 
-              {history.text.substring(0, 55) + "..."}
+              {history.text.substring(0, substringLength) + "..."}
               {/* <FaLongArrowAltRight className='arrow-icon' /> */}
             </div>
           ))}
