@@ -371,6 +371,35 @@ span {
   background-color: rgb(133, 133, 190);
 }
 
+.chat-interface .search-bar {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(44, 43, 43);
+  height: 40px;
+  width: 85vw;
+  border-radius: 20px;
+}
+
+.chat-interface .search-bar .close {
+  cursor: pointer;
+  color: rgb(248, 65, 65);
+}
+
+.chat-interface .search-bar input {
+  width: 200px;
+  margin: 0 20px;
+  background: none;
+  color: rgb(214, 214, 214);
+  border: none;
+  outline: none;
+}
+
 .chat-interface .chatbody .user-ai {
   padding-top: 50px;
   padding-bottom: 17%;
@@ -447,6 +476,7 @@ span {
   width: 35px;
   border-top-left-radius: 20%;
   border-bottom-right-radius: 20%;
+  cursor: pointer;
 }
 
 /* ----------- New Chat Interface ---------- */
@@ -584,6 +614,63 @@ span {
 }
 
 /*  ......... Desktop Version ......... */
+
+@media (min-width: 450px) {
+  .chat-interface .search-bar input {
+    width: 300px;
+    margin: 0 20px;
+    background: none;
+    color: rgb(214, 214, 214);
+    border: none;
+    outline: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .chat-interface .search-bar {
+    position: absolute;
+    left: 80px;
+    width: 70vw;
+  }
+
+  .chat-interface .search-bar input {
+    width: 300px;
+  }
+}
+@media (min-width: 750px) {
+  .chat-interface .search-bar {
+    position: absolute;
+    left: 80px;
+    width: 60vw;
+  }
+
+  .chat-interface .search-bar input {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .chat-interface .search-bar {
+    position: absolute;
+    left: 100px;
+    width: 40vw;
+  }
+
+  .chat-interface .search-bar input {
+    width: 300px;
+  }
+}
+@media (min-width: 1450px) {
+  .chat-interface .search-bar {
+    position: absolute;
+    left: 120px;
+    width: 40vw;
+  }
+
+  .chat-interface .search-bar input {
+    width: 360px;
+  }
+}
 
 @media (max-width: 850px) {
   .desknav .stethoscope {
@@ -1007,11 +1094,12 @@ span {
   }
 
   .chat-interface .main-chat .default-message {
-    width: 45vw;
+    width: 50vw;
   }
 }
 
 .highlight {
-  background-color: yellow;
+  background-color: rgb(255, 255, 255);
   font-weight: bold;
+  color: black;
 }

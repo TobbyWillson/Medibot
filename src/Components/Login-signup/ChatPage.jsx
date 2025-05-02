@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import robot from "../Assets/android-robot.png";
 
@@ -9,6 +9,7 @@ import { FaEllipsis } from "react-icons/fa6";
 import { BsPaperclip } from "react-icons/bs";
 import { VscSend } from "react-icons/vsc";
 import { ImSearch } from "react-icons/im";
+import { FaTimes } from "react-icons/fa";
 
 import { MdMessage } from "react-icons/md";
 
@@ -19,6 +20,8 @@ const ChatPage = () => {
   const insertMessage = (e) => {
     setInsert(e.target.value);
   };
+
+  // --------------- History button Visibility
 
   const [showHistory, setShowHistory] = useState(false);
 
@@ -42,6 +45,49 @@ const ChatPage = () => {
   const goBack = () => {
     navigate(-1);
   };
+
+  //  -------------------- Search Bar Visibility
+
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const searchBarRef = useRef(null);
+
+  const toggleSearchBar = (e) => {
+    e.stopPropagation();
+    setShowSearchBar(!showSearchBar);
+    handleCloseSearch();
+  };
+
+  const handleCloseSearch = () => {
+    setSearchQuery("");
+  };
+
+  const closeSearchBar = (e) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
+      setShowSearchBar(false);
+      handleCloseSearch();
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", closeSearchBar);
+    return () => {
+      document.body.removeEventListener("click", closeSearchBar);
+    };
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+  const highlightText = (text) => {
+    if (!searchQuery) return text;
+    const regex = new RegExp(searchQuery, "gi");
+    return text.replace(regex, (match) => `<span class='highlight'>${match}</span>`);
+  };
+
+  // ----------------------------------
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -172,6 +218,20 @@ const ChatPage = () => {
               History
             </Link>
           )}
+
+          {showSearchBar && (
+            <div className='search-bar' ref={searchBarRef}>
+              <ImSearch className='search' />
+              <input type='text' value={searchQuery} onChange={(e) => handleSearch(e)} placeholder='Enter your keyword...' />
+              <FaTimes
+                className='close'
+                onClick={() => {
+                  setShowSearchBar(false);
+                  handleCloseSearch();
+                }}
+              />
+            </div>
+          )}
         </div>
 
         <div className='chatbody'>
@@ -180,7 +240,7 @@ const ChatPage = () => {
               <div className='user-ai'>
                 {messages.map((message) => (
                   <div key={message.id} className={message.sender === "user" ? "user-chat" : "ai-chat"}>
-                    {message.text}
+                    <p dangerouslySetInnerHTML={{ __html: highlightText(message.text) }}></p>
                   </div>
                 ))}
               </div>
@@ -196,7 +256,7 @@ const ChatPage = () => {
         <div className='inputbox-bg'>
           <div className='text-message'>
             <div className='text-comps'>
-              <ImSearch className='message-icon search' />
+              <ImSearch className='message-icon search' onClick={toggleSearchBar} />
               <input type='text' placeholder='Type your message here...' onChange={insertMessage} />
               <VscSend className='message-icon' />
             </div>
