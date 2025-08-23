@@ -1,5 +1,6 @@
 // server.js
 import express from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -12,8 +13,17 @@ dotenv.config();
 
 const app = express();
 
+app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"],
+    credentials: true, // allow sending cookies
+  })
+);
+
 // ------------------ Middlewares ------------------
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
