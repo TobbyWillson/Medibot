@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import History from "./pages/History";
 import Search from "./pages/Search";
+import ChatBox from "./pages/ChatBox";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path='/chat' element={<Chat />} />
       <Route path='/history' element={<History />} />
       <Route path='/search' element={<Search />} />
+      <Route path='/chatbox' element={<ChatBox />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

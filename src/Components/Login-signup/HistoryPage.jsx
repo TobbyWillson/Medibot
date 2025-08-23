@@ -100,7 +100,7 @@ const HistoryPage = () => {
   }, []);
 
   return (
-    <div className='history-container'>
+    <div className='history-container mobile-history'>
       <h1 className='heading'>History</h1>
 
       <div className='details-section'>
