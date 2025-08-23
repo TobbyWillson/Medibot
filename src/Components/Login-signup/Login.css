@@ -582,6 +582,7 @@ span {
   flex-direction: column;
   background: #000000;
   color: white;
+  height: 95vh;
 }
 
 .chat-nav {
