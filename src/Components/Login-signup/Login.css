@@ -324,7 +324,9 @@ span {
 /* ---------- Chat Interface ---------- */
 .chat-interface {
   display: flex;
-  height: 100vh;
+  flex-direction: row;
+  height: 100dvh;
+  min-height: 100%;
   max-width: 100vw;
   overflow: hidden;
 
@@ -582,7 +584,8 @@ span {
   flex-direction: column;
   background: #000000;
   color: white;
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100%;
 }
 
 .chat-nav {
@@ -688,6 +691,7 @@ span {
 .inputbox-bg {
   border-top: 1px solid #757575;
   padding: 5px 10px;
+  flex-shrink: 0;
 }
 
 .text-message {
