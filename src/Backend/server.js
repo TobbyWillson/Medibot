@@ -39,6 +39,23 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
+app.get("/test-mongo", async (req, res) => {
+  try {
+    const dbList = await mongoose.connection.db.admin().listDatabases();
+    res.json({ databases: dbList.databases });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+app.get("/test-mongo", async (req, res) => {
+  try {
+    const dbList = await mongoose.connection.db.admin().listDatabases();
+    res.json({ databases: dbList.databases });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ------------------ Chat Schema ------------------
 const chatSchema = new mongoose.Schema({
   user: { type: String, default: "Anonymous" },
