@@ -2,20 +2,21 @@
 import express from "express";
 import Chat from "../models/Chat.js";
 import { authMiddleware } from "../middleware/auth.js";
-import OpenAI from "openai"; // ✅ Still use OpenAI SDK (compatible with Gemini)
+import OpenAI from "openai";
 import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
 // ✅ Gemini client (via OpenAI SDK, with baseURL pointing to Google)
 const gemini = new OpenAI({
-  apiKey: process.env.GEMINI_API_KEY, // ⚠️ make sure this is set in .env
+  apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
 // ------------------ SSE Streaming ------------------
 const streams = {};
 
+// Start a new stream
 router.post("/stream", authMiddleware, (req, res) => {
   const { message } = req.body;
   if (!message) return res.status(400).json({ message: "Message is required" });
@@ -60,12 +61,21 @@ router.get("/stream/:id", authMiddleware, async (req, res) => {
     res.write("data: [DONE]\n\n");
     res.end();
 
-    // Save chat in DB
-    await Chat.create({
-      userId: req.user.id,
-      prompt: userMessage,
-      response: fullResponse,
-    });
+    // ✅ Save messages to session
+    const sessionId = id; // reuse streamId as sessionId
+    let chatSession = await Chat.findOne({ userId: req.user.id, sessionId });
+
+    if (!chatSession) {
+      chatSession = new Chat({
+        userId: req.user.id,
+        sessionId,
+        messages: [],
+      });
+    }
+
+    chatSession.messages.push({ role: "user", content: userMessage }, { role: "assistant", content: fullResponse });
+
+    await chatSession.save();
 
     delete streams[id];
   } catch (err) {
@@ -86,15 +96,23 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Fetch chat history
-app.get("/api/chat/history", async (req, res) => {
+// ------------------ Get chat sessions ------------------
+router.get("/sessions", authMiddleware, async (req, res) => {
   try {
-    // Fetch last 20 messages sorted by newest first
-    const chats = await Chat.find().sort({ createdAt: -1 }).limit(20);
-    res.json(chats.reverse()); // reverse to show oldest first
+    // ✅ Fetch only the latest 20 sessions
+    const sessions = await Chat.find({ userId: req.user.id }).sort({ createdAt: -1 }).limit(20);
+
+    // Return only metadata for sidebar
+    const sidebarData = sessions.map((session) => ({
+      sessionId: session.sessionId,
+      lastMessage: session.messages.at(-1)?.content || "",
+      createdAt: session.createdAt,
+    }));
+
+    res.json(sidebarData);
   } catch (err) {
-    console.error("Error fetching chat history:", err);
-    res.status(500).json({ error: "Failed to fetch chat history" });
+    console.error("Error fetching chat sessions:", err);
+    res.status(500).json({ error: "Failed to fetch sessions" });
   }
 });
 

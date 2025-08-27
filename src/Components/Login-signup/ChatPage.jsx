@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import robot from "../Assets/android-robot.png";
 
 import { FaArrowLeft, FaEllipsisV, FaTable, FaTimes } from "react-icons/fa";
-
 import { FaPowerOff } from "react-icons/fa";
 import { VscSend } from "react-icons/vsc";
 import { ImSearch } from "react-icons/im";
@@ -19,7 +18,7 @@ import api from "../../api"; // axios instance
 // Safe Highlight Component
 const HighlightedText = ({ text, query }) => {
   if (!query) return <>{text}</>;
-  const regex = new RegExp(`(${query})`, "gi");
+  const regex = new RegExp(`${query}`, "gi");
   const parts = text.split(regex);
 
   return (
@@ -52,6 +51,8 @@ const ChatPage = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("chatMessages");
+
     navigate("/login");
   };
 
@@ -222,9 +223,9 @@ const ChatPage = () => {
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm, remarkBreaks]}
                           components={{
-                            p: ({ node, ...props }) => <p className='text-gray-200 leading-relaxed' {...props} />,
-                            strong: ({ node, ...props }) => <strong className='font-bold text-white' {...props} />,
-                            code: ({ node, ...props }) => <code className='bg-gray-800 text-green-400 px-1 rounded' {...props} />,
+                            p: (props) => <p className='text-gray-200 leading-relaxed' {...props} />,
+                            strong: (props) => <strong className='font-bold text-white' {...props} />,
+                            code: (props) => <code className='bg-gray-800 text-green-400 px-1 rounded' {...props} />,
                           }}
                         >
                           {msg.text}
