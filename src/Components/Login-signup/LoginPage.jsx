@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await api.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
+      const res = await api.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token); // store JWT
       alert("Login successful!");
       navigate("/chat"); // redirect to chat after login

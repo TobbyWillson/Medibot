@@ -9,6 +9,8 @@ import { ImSearch } from "react-icons/im";
 import { MdMessage } from "react-icons/md";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 
 import api from "../../api"; // axios instance
 
@@ -45,6 +47,21 @@ const ChatPage = () => {
   const chatEndRef = useRef(null);
 
   const navigate = useNavigate();
+
+  // Load messages from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("chatMessages");
+    if (stored) {
+      setMessages(JSON.parse(stored));
+    }
+  }, []);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem("chatMessages", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   // History toggle
   const toggleVisibility = (e) => {
@@ -85,12 +102,12 @@ const ChatPage = () => {
 
     try {
       // Step 1: Send message to backend to create a stream
-      const { data } = await api.post(`${process.env.REACT_APP_API_URL}/api/chat`, { message: userMessage.text });
+      const { data } = await api.post(`${process.env.REACT_APP_API_URL}/chat`, { message: userMessage.text });
       const streamId = data.streamId;
 
       // Step 2: Prepare EventSource
       const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-      const eventSource = new EventSource(`${baseURL}/api/chat/stream/${streamId}`);
+      const eventSource = new EventSource(`${baseURL}/chat/stream/${streamId}`);
 
       // Add a placeholder AI message for streaming
       const aiMessageId = Date.now() + 1;
@@ -114,14 +131,14 @@ const ChatPage = () => {
         console.error("SSE error:", err);
         setLoading(false);
         eventSource.close();
-        setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: "⚠️ Something went wrong. Please try again." } : msg)));
+        setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: "⚠ Something went wrong. Please try again." } : msg)));
       };
     } catch (err) {
       console.error("Chat error:", err);
       setLoading(false);
       const errorMessage = {
         id: Date.now() + 1,
-        text: "⚠️ Something went wrong. Please try again.",
+        text: "⚠ Something went wrong. Please try again.",
         sender: "ai",
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -133,15 +150,8 @@ const ChatPage = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Dummy chat history
-  const histories = [
-    {
-      id: 1,
-      text: "What are the common symptoms of hypothyroidism and how is it treated?",
-    },
-    { id: 2, text: "Can you explain the causes and effects of high blood pressure?" },
-    { id: 3, text: "How do I manage stress and anxiety during lockdown?" },
-  ];
+  // -------------------- Dynamic History --------------------
+  const histories = messages.filter((msg) => msg.sender === "user"); // only user messages
 
   return (
     <div className='chat-interface'>
@@ -150,12 +160,16 @@ const ChatPage = () => {
         <h1 className='heading'>History</h1>
         <div className='details-section'>
           <div className='history-details'>
-            {histories.map((h) => (
-              <div key={h.id} className='each-history'>
-                <MdMessage className='message-icon' />
-                {h.text.substring(0, 70) + "..."}
-              </div>
-            ))}
+            {histories.length > 0 ? (
+              histories.map((h) => (
+                <div key={h.id} className='each-history'>
+                  <MdMessage className='message-icon' />
+                  {h.text.length > 70 ? h.text.substring(0, 70) + "..." : h.text}
+                </div>
+              ))
+            ) : (
+              <p className='no-history'>No history yet</p>
+            )}
           </div>
         </div>
       </div>
@@ -191,8 +205,17 @@ const ChatPage = () => {
                         <HighlightedText text={msg.text} query={searchQuery} />
                       </p>
                     ) : (
-                      <div className='ai-chat-markdown'>
-                        <ReactMarkdown>{msg.text}</ReactMarkdown>
+                      <div>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm, remarkBreaks]}
+                          components={{
+                            p: ({ node, ...props }) => <p className='text-gray-200 leading-relaxed' {...props} />,
+                            strong: ({ node, ...props }) => <strong className='font-bold text-white' {...props} />,
+                            code: ({ node, ...props }) => <code className='bg-gray-800 text-green-400 px-1 rounded' {...props} />,
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
                       </div>
                     )}
                   </div>

@@ -459,6 +459,7 @@ span {
 
 .ai-chat-markdown {
   white-space: pre-wrap;
+  /* word-wrap: break-word; */
   line-height: 1.6;
 }
 
