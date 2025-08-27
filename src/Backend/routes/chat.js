@@ -2,39 +2,15 @@
 import express from "express";
 import Chat from "../models/Chat.js";
 import { authMiddleware } from "../middleware/auth.js";
-import OpenAI from "openai";
+import OpenAI from "openai"; // ✅ Still use OpenAI SDK (compatible with Gemini)
 import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// ------------------ Normal Chat POST ------------------
-router.post("/", authMiddleware, async (req, res) => {
-  const { message } = req.body;
-  if (!message) return res.status(400).json({ message: "Message is required" });
-
-  try {
-    const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: "You are Medibot, a helpful medical assistant." },
-        { role: "user", content: message },
-      ],
-    });
-
-    const aiReply = completion.choices[0]?.message?.content || "No response";
-
-    const newChat = await Chat.create({
-      userId: req.user.id,
-      prompt: message,
-      response: aiReply,
-    });
-
-    res.status(201).json({ reply: aiReply, chatId: newChat._id });
-  } catch (err) {
-    console.error("AI chat error:", err);
-    res.status(500).json({ message: "AI failed to respond" });
-  }
+// ✅ Gemini client (via OpenAI SDK, with baseURL pointing to Google)
+const gemini = new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY, // ⚠️ make sure this is set in .env
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
 // ------------------ SSE Streaming ------------------
@@ -49,7 +25,7 @@ router.post("/stream", authMiddleware, (req, res) => {
   res.json({ streamId });
 });
 
-// ✅ Updated streaming GET route
+// ✅ Streaming GET route with Gemini
 router.get("/stream/:id", authMiddleware, async (req, res) => {
   const { id } = req.params;
   const userMessage = streams[id]?.message;
@@ -62,9 +38,9 @@ router.get("/stream/:id", authMiddleware, async (req, res) => {
   let fullResponse = "";
 
   try {
-    // OpenAI streaming call
-    const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    // Gemini streaming call
+    const completion = await gemini.chat.completions.create({
+      model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
       messages: [
         { role: "system", content: "You are Medibot, a helpful medical assistant." },
         { role: "user", content: userMessage },
@@ -93,7 +69,7 @@ router.get("/stream/:id", authMiddleware, async (req, res) => {
 
     delete streams[id];
   } catch (err) {
-    console.error("SSE streaming error:", err);
+    console.error("SSE streaming error:", err.response?.data || err);
     res.write("data: ⚠️ Something went wrong\n\n");
     res.end();
   }
@@ -107,6 +83,18 @@ router.get("/", authMiddleware, async (req, res) => {
   } catch (err) {
     console.error("Fetch chats error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Fetch chat history
+app.get("/api/chat/history", async (req, res) => {
+  try {
+    // Fetch last 20 messages sorted by newest first
+    const chats = await Chat.find().sort({ createdAt: -1 }).limit(20);
+    res.json(chats.reverse()); // reverse to show oldest first
+  } catch (err) {
+    console.error("Error fetching chat history:", err);
+    res.status(500).json({ error: "Failed to fetch chat history" });
   }
 });
 

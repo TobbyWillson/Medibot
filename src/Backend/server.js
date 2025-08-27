@@ -48,8 +48,11 @@ const chatSchema = new mongoose.Schema({
 });
 const Chat = mongoose.model("Chat", chatSchema);
 
-// ------------------ OpenAI Setup ------------------
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// ------------------ OpenAI / Gemini Setup ------------------
+const gemini = new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+});
 
 // ------------------ Memory store for SSE ------------------
 const streams = {};
@@ -62,7 +65,7 @@ app.post("/api/chat", (req, res) => {
   const streamId = uuidv4();
   streams[streamId] = { message };
 
-  res.json({ streamId });
+  res.json({ streamId }); // frontend uses this to open EventSource
 });
 
 // Step 2: Stream AI response via SSE
@@ -77,13 +80,13 @@ app.get("/api/chat/stream/:id", async (req, res) => {
   res.setHeader("Connection", "keep-alive");
 
   try {
-    // OpenAI streaming (async iterator)
-    const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+    // OpenAI/Gemini streaming call
+    const completion = await gemini.chat.completions.create({
+      model: "gemini-2.0-flash",
       messages: [
         {
           role: "system",
-          content: "You are Medibot, a healthcare assistant. You provide safe medical information and health advice, but do not replace a doctor.",
+          content: "You are Medibot, a healthcare assistant. Provide safe medical information and health advice, but do not replace a doctor.",
         },
         { role: "user", content: userMessage },
       ],
@@ -92,8 +95,10 @@ app.get("/api/chat/stream/:id", async (req, res) => {
 
     let fullResponse = "";
 
+    // Stream chunks to client
     for await (const chunk of completion) {
-      const content = chunk.choices[0]?.delta?.content;
+      console.log("SSE chunk:", JSON.stringify(chunk, null, 2));
+      const content = chunk.choices[0]?.delta?.content || chunk.choices?.[0]?.message?.content;
       if (content) {
         fullResponse += content;
         res.write(`data: ${content}\n\n`);
@@ -116,6 +121,7 @@ app.get("/api/chat/stream/:id", async (req, res) => {
   } catch (err) {
     console.error("OpenAI SSE error:", err);
     res.write("data: ⚠️ Something went wrong\n\n");
+    res.write("data: [DONE]\n\n");
     res.end();
   }
 });

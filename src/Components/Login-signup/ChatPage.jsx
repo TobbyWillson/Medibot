@@ -8,6 +8,8 @@ import { VscSend } from "react-icons/vsc";
 import { ImSearch } from "react-icons/im";
 import { MdMessage } from "react-icons/md";
 
+import ReactMarkdown from "react-markdown";
+
 import api from "../../api"; // axios instance
 
 // Safe Highlight Component
@@ -72,7 +74,7 @@ const ChatPage = () => {
   const handleSearch = (e) => setSearchQuery(e.target.value.toLowerCase());
   const handleCloseSearchQuery = () => setSearchQuery("");
 
-  // -------------------- SSE Streaming --------------------
+  // -------------------- Gemini Chat --------------------
   const handleSendMessage = async () => {
     if (!insert.trim()) return;
 
@@ -81,36 +83,48 @@ const ChatPage = () => {
     setInsert("");
     setLoading(true);
 
-    const aiMessage = { id: Date.now() + 1, text: "", sender: "ai" };
-    setMessages((prev) => [...prev, aiMessage]);
-
     try {
-      // 1️⃣ Send user message to backend, get streamId + chatId
-      const { data } = await api.post("/chat", { message: userMessage.text });
-      const { streamId, chatId } = data;
+      // Step 1: Send message to backend to create a stream
+      const { data } = await api.post(`${process.env.REACT_APP_API_URL}/api/chat`, { message: userMessage.text });
+      const streamId = data.streamId;
 
-      // 2️⃣ Open SSE connection
-      const eventSource = new EventSource(`${process.env.REACT_APP_API_URL}/chat/stream/${streamId}?chatId=${chatId}`);
+      // Step 2: Prepare EventSource
+      const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const eventSource = new EventSource(`${baseURL}/api/chat/stream/${streamId}`);
+
+      // Add a placeholder AI message for streaming
+      const aiMessageId = Date.now() + 1;
+      setMessages((prev) => [...prev, { id: aiMessageId, text: "", sender: "ai" }]);
+
+      let fullAIText = "";
 
       eventSource.onmessage = (event) => {
         if (event.data === "[DONE]") {
-          eventSource.close();
           setLoading(false);
+          eventSource.close();
+          setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: fullAIText } : msg)));
         } else {
-          setMessages((prev) => prev.map((msg) => (msg.id === aiMessage.id ? { ...msg, text: msg.text + event.data } : msg)));
+          fullAIText += event.data;
+          // Update AI message in place
+          setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: fullAIText } : msg)));
         }
       };
 
       eventSource.onerror = (err) => {
         console.error("SSE error:", err);
         setLoading(false);
-        setMessages((prev) => prev.map((msg) => (msg.id === aiMessage.id ? { ...msg, text: "⚠️ Something went wrong. Please try again." } : msg)));
         eventSource.close();
+        setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: "⚠️ Something went wrong. Please try again." } : msg)));
       };
     } catch (err) {
       console.error("Chat error:", err);
-      setMessages((prev) => prev.map((msg) => (msg.id === aiMessage.id ? { ...msg, text: "⚠️ Something went wrong. Please try again." } : msg)));
       setLoading(false);
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: "⚠️ Something went wrong. Please try again.",
+        sender: "ai",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     }
   };
 
@@ -121,7 +135,10 @@ const ChatPage = () => {
 
   // Dummy chat history
   const histories = [
-    { id: 1, text: "What are the common symptoms of hypothyroidism and how is it treated?" },
+    {
+      id: 1,
+      text: "What are the common symptoms of hypothyroidism and how is it treated?",
+    },
     { id: 2, text: "Can you explain the causes and effects of high blood pressure?" },
     { id: 3, text: "How do I manage stress and anxiety during lockdown?" },
   ];
@@ -169,9 +186,15 @@ const ChatPage = () => {
               <div className='user-ai'>
                 {messages.map((msg) => (
                   <div key={msg.id} className={msg.sender === "user" ? "user-chat" : "ai-chat"}>
-                    <p>
-                      <HighlightedText text={msg.text} query={searchQuery} />
-                    </p>
+                    {msg.sender === "user" ? (
+                      <p>
+                        <HighlightedText text={msg.text} query={searchQuery} />
+                      </p>
+                    ) : (
+                      <div className='ai-chat-markdown'>
+                        <ReactMarkdown>{msg.text}</ReactMarkdown>
+                      </div>
+                    )}
                   </div>
                 ))}
                 {loading && <p className='loading'>Medibot is typing...</p>}

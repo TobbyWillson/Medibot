@@ -35,7 +35,7 @@ const SignupPage = () => {
     }
 
     try {
-      const res = await api.post("/auth/signup", {
+      const res = await api.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, {
         username,
         email,
         password,

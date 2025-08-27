@@ -400,6 +400,39 @@ span {
   outline: none;
 }
 
+.chatbody {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.main-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.user-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.user-chat,
+.ai-chat {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.35rem;
+}
+
 .chat-interface .user-chat {
   border-radius: 20px;
   border-bottom-right-radius: 1px;
@@ -407,17 +440,26 @@ span {
   background-color: rgb(37, 37, 37);
   color: rgb(255, 253, 253);
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
+
+  align-self: flex-end;
 }
 
 .chat-interface .ai-chat {
   border-radius: 20px;
   border-bottom-left-radius: 1px;
 
-  background-color: rgb(17, 17, 17);
+  background-color: rgb(10, 10, 10);
   color: rgb(255, 255, 255);
   font-size: 13px;
-  font-weight: bold;
+  font-weight: normal;
+
+  align-self: flex-start;
+}
+
+.ai-chat-markdown {
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 
 .chat-interface .text-message input {
@@ -621,48 +663,6 @@ span {
 }
 
 /* ---------- Chat Body ---------- */
-.chatbody {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.main-chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.user-ai {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.user-chat,
-.ai-chat {
-  max-width: 70%;
-  padding: 10px 14px;
-  border-radius: 12px;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-
-.user-chat {
-  align-self: flex-end;
-  background: #4a90e2;
-  color: white;
-}
-
-.ai-chat {
-  align-self: flex-start;
-  background: #e2e8f0;
-  color: #222;
-}
 
 .loading {
   font-size: 13px;

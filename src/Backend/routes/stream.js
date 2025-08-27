@@ -1,11 +1,16 @@
 // routes/stream.js
 import express from "express";
 import { authMiddleware } from "../middleware/auth.js";
-import OpenAI from "openai";
+import OpenAI from "openai"; // ✅ Still use OpenAI SDK (Gemini-compatible)
 import Chat from "../models/Chat.js";
 
 const router = express.Router();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// ✅ Gemini client
+const gemini = new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+});
 
 // SSE Streaming endpoint
 router.get("/stream/:chatId", authMiddleware, async (req, res) => {
@@ -24,9 +29,9 @@ router.get("/stream/:chatId", authMiddleware, async (req, res) => {
 
     let aiText = "";
 
-    // Streaming with async iterator (OpenAI SDK v4+)
-    const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+    // Streaming with async iterator (Gemini SDK)
+    const completion = await gemini.chat.completions.create({
+      model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
       messages: [
         { role: "system", content: "You are Medibot, a helpful medical assistant." },
         { role: "user", content: chat.prompt },
