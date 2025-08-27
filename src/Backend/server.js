@@ -39,7 +39,7 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-app.get("/test-mongo", async (req, res) => {
+app.get(`${process.env.REACT_APP_API_URL}/test-mongo`, async (req, res) => {
   try {
     const dbList = await mongoose.connection.db.admin().listDatabases();
     res.json({ databases: dbList.databases });
