@@ -3,7 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import robot from "../Assets/android-robot.png";
 
-import { FaArrowLeft, FaEllipsisV, FaTimes } from "react-icons/fa";
+import { FaArrowLeft, FaEllipsisV, FaTable, FaTimes } from "react-icons/fa";
+
+import { FaPowerOff } from "react-icons/fa";
 import { VscSend } from "react-icons/vsc";
 import { ImSearch } from "react-icons/im";
 import { MdMessage } from "react-icons/md";
@@ -47,6 +49,11 @@ const ChatPage = () => {
   const chatEndRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
 
   // Load messages from localStorage on mount
   useEffect(() => {
@@ -181,9 +188,15 @@ const ChatPage = () => {
           <p>Chat with Medibot</p>
           <FaEllipsisV onClick={toggleVisibility} className='ellipsis' />
           {showHistory && (
-            <Link to='/history' className='history'>
-              History
-            </Link>
+            <div className='history-logout'>
+              <Link to='/history' className='history'>
+                History
+              </Link>
+
+              <p onClick={handleLogout} className='logout'>
+                Logout <FaPowerOff className='poweroff' />
+              </p>
+            </div>
           )}
           {showSearchBar && (
             <div className='search-bar' ref={searchBarRef}>

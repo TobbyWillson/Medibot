@@ -650,17 +650,45 @@ span {
   color: #c0c0c0;
 }
 
-.history {
+.history-logout {
   position: absolute;
   top: 45px;
   right: 15px;
-  background: white;
-  border: 1px solid #ddd;
+
   padding: 6px 12px;
   border-radius: 6px;
   text-decoration: none;
   color: #333;
   font-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.history,
+.logout {
+  border: 1px solid #ddd;
+}
+
+.logout {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(109, 108, 108);
+  padding: 7px 15px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  cursor: pointer;
+  background-color: rgb(223, 65, 65);
+  display: flex;
+  align-items: center;
+}
+
+.logout .poweroff {
+  min-width: 40%;
+}
+
+.logout:hover {
+  background-color: rgb(255, 2, 2);
 }
 
 /* ---------- Chat Body ---------- */
