@@ -2,13 +2,13 @@
 import express from "express";
 import Chat from "../models/Chat.js";
 import { authMiddleware } from "../middleware/auth.js";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
 // ✅ Gemini client (via OpenAI SDK, with baseURL pointing to Google)
-const gemini = new OpenAI({
+const gemini = new GoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });

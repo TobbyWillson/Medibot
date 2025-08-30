@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { v4 as uuidv4 } from "uuid";
 
 import authRoutes from "./routes/auth.js";
@@ -68,7 +68,7 @@ const chatSchema = new mongoose.Schema({
 const Chat = mongoose.model("Chat", chatSchema);
 
 // ------------------  Gemini Setup ------------------
-const gemini = new OpenAI({
+const gemini = new GoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
