@@ -31,12 +31,14 @@ app.use(
 );
 
 // ------------------ Middlewares ------------------
-app.use(cors({ origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"], credentials: true }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ------------------ Test Route ------------------
 app.get("/test", (req, res) => res.send("Server is working!"));
+
+app.get("/", (req, res) => res.send("Medibot backend is running 🚀"));
 
 // ------------------ MongoDB Setup ------------------
 mongoose
