@@ -15,9 +15,17 @@ const app = express();
 
 app.use(cookieParser());
 
+// CORS: allow your Vercel site + localhost
+const allowed = [process.env.FRONTEND_URL, "http://localhost:3000"];
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"],
+    origin: (origin, cb) => {
+      if (!origin) return cb(null, true);
+      if (allowed.some((a) => a && (a === origin || (a instanceof RegExp && a.test(origin))))) return cb(null, true);
+      // allow all *.vercel.app previews (optional, handy)
+      if (/\.vercel\.app$/.test(origin)) return cb(null, true);
+      return cb(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
