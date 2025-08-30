@@ -9,16 +9,14 @@ import { VscSend } from "react-icons/vsc";
 import { ImSearch } from "react-icons/im";
 import { MdMessage } from "react-icons/md";
 
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
+import ReactMarkdown from "../ReactMarkdown";
 
 import api from "../../api"; // axios instance
 
-// Safe Highlight Component
+// ✅ Fixed Highlight Component (keeps matched text)
 const HighlightedText = ({ text, query }) => {
   if (!query) return <>{text}</>;
-  const regex = new RegExp(`${query}`, "gi");
+  const regex = new RegExp(`(${query})`, "gi");
   const parts = text.split(regex);
 
   return (
@@ -52,7 +50,6 @@ const ChatPage = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("chatMessages");
-
     navigate("/login");
   };
 
@@ -139,7 +136,16 @@ const ChatPage = () => {
         console.error("SSE error:", err);
         setLoading(false);
         eventSource.close();
-        setMessages((prev) => prev.map((msg) => (msg.id === aiMessageId ? { ...msg, text: "⚠ Something went wrong. Please try again." } : msg)));
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === aiMessageId
+              ? {
+                  ...msg,
+                  text: "⚠ Something went wrong. Please try again.",
+                }
+              : msg
+          )
+        );
       };
     } catch (err) {
       console.error("Chat error:", err);
@@ -219,22 +225,32 @@ const ChatPage = () => {
                         <HighlightedText text={msg.text} query={searchQuery} />
                       </p>
                     ) : (
-                      <div>
+                      <div className='p-6'>
                         <ReactMarkdown
-                          remarkPlugins={[remarkGfm, remarkBreaks]}
                           components={{
-                            p: (props) => <p className='text-gray-200 leading-relaxed' {...props} />,
-                            strong: (props) => <strong className='font-bold text-white' {...props} />,
-                            code: (props) => <code className='bg-gray-800 text-green-400 px-1 rounded' {...props} />,
+                            p: ({ children }) => (
+                              <p>
+                                <HighlightedText text={String(children)} query={searchQuery} />
+                              </p>
+                            ),
+                            li: ({ children }) => (
+                              <li>
+                                <HighlightedText text={String(children)} query={searchQuery} />
+                              </li>
+                            ),
                           }}
                         >
-                          {msg.text}
+                          {msg.text.replace(/\\n/g, "\n")}
                         </ReactMarkdown>
                       </div>
                     )}
                   </div>
                 ))}
-                {loading && <p className='loading'>Medibot is typing...</p>}
+                {loading && (
+                  <div className='ai-chat'>
+                    <p className='loading'>Medibot is typing...</p>
+                  </div>
+                )}
                 <div ref={chatEndRef} />
               </div>
             ) : (
@@ -255,6 +271,7 @@ const ChatPage = () => {
               <VscSend className='message-icon' onClick={handleSendMessage} />
             </div>
           </div>
+          <p className='reliance'>Medibot can be wrong sometimes, consult a professional...</p>
         </div>
       </div>
     </div>

@@ -335,26 +335,13 @@ span {
   font-weight: 700;
 
   user-select: none;
-  background-color: black;
+  background-color: rgb(15, 15, 15);
 }
 
 .chat-interface .chat-nav .ellipsis,
 .backbutton {
   font-size: 20px;
   cursor: pointer;
-}
-
-.chat-interface .chat-nav .history {
-  text-decoration: none;
-  color: white;
-  background-color: rgb(109, 108, 108);
-  padding: 7px 15px;
-  border-radius: 10px;
-  border-top-right-radius: 0px;
-}
-
-.chat-interface .chat-nav .history:hover {
-  background-color: rgb(133, 133, 190);
 }
 
 .chat-interface .search-bar {
@@ -407,6 +394,7 @@ span {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  background-color: rgb(15, 15, 15);
 }
 
 .main-chat {
@@ -437,12 +425,13 @@ span {
   border-radius: 20px;
   border-bottom-right-radius: 1px;
 
-  background-color: rgb(37, 37, 37);
+  background-color: rgb(27, 26, 26);
   color: rgb(255, 253, 253);
   font-size: 16px;
   font-weight: normal;
 
   align-self: flex-end;
+  text-align: left;
 }
 
 .chat-interface .ai-chat {
@@ -455,6 +444,8 @@ span {
   font-weight: normal;
 
   align-self: flex-start;
+
+  text-align: left;
 }
 
 .ai-chat-markdown {
@@ -473,7 +464,7 @@ span {
 }
 
 .text-message .text-comps {
-  background-color: rgb(44, 43, 43);
+  background-color: rgb(20, 20, 20);
   border-radius: 20px;
   z-index: 1000;
 }
@@ -499,10 +490,15 @@ span {
 }
 
 .history-container .heading {
-  background-color: black;
+  background-color: #000000;
   font-size: 25px;
   width: 100%;
   z-index: 1000;
+}
+
+.history-container .history-page {
+  /* position: fixed; */
+  /* z-index: 200; */
 }
 
 /* ---------- History Sidebar ---------- */
@@ -510,19 +506,20 @@ span {
   width: 290px;
   min-width: 260px;
   background: #000000;
-  border-right: 1px solid #4b4a4a;
+  /* border-right: 1px solid #4b4a4a; */
   display: flex;
   flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .history-container .history-details .each-history {
-  background-color: rgb(29, 29, 29);
+  background-color: rgb(27, 26, 26);
   padding: 5px 10px;
   margin-bottom: 3px;
   border-radius: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  border: rgb(58, 57, 57) solid 1px;
+  font-size: 13px;
+  /* font-weight: bold; */
+  /* border: rgb(46, 45, 45) solid 1px; */
   cursor: pointer;
 }
 
@@ -533,6 +530,8 @@ span {
 
 .history-details .message-icon {
   font-size: 30px;
+  max-width: 20px;
+  min-width: 20px;
   margin-right: 10px;
   color: rgb(157, 158, 158);
 }
@@ -581,7 +580,7 @@ span {
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid #3a3a3a;
+  /* border-bottom: 1px solid #3a3a3a; */
 }
 
 .details-section {
@@ -621,7 +620,8 @@ span {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #000000;
+
+  background: rgb(10, 10, 10);
   color: white;
 
   height: 100%;
@@ -634,7 +634,9 @@ span {
   justify-content: space-between;
   padding: 12px 15px;
 
-  border-bottom: 1px solid #6e6e6e;
+  /* border-bottom: 1px solid #6e6e6e; */
+  /* box-shadow: 1px 1px 5px rgb(192, 192, 192); */
+
   color: white;
   z-index: 10000;
 }
@@ -665,9 +667,28 @@ span {
   flex-direction: column;
 }
 
-.history,
-.logout {
+.history-logout .history {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(109, 108, 108);
+  padding: 7px 15px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+}
+
+.history-logout .history:hover {
+  background-color: rgb(133, 133, 190);
+}
+
+.history-logout .history,
+.history-logout .logout {
+  border: 1px solid #6e6e6e;
+}
+.history-logout .history:hover,
+.history-logout .logout:hover {
   border: 1px solid #ddd;
+  transition: all 0.8s;
+  transform: scale(0.9);
 }
 
 .logout {
@@ -717,9 +738,18 @@ span {
 
 /* ---------- Input Box ---------- */
 .inputbox-bg {
-  border-top: 1px solid #757575;
+  border-top: 1px solid #646464;
+  box-shadow: 1px 1px 5px rgb(192, 192, 192);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
   padding: 5px 10px;
   flex: 0 0 auto;
+}
+
+.inputbox-bg .reliance {
+  margin: 10px;
+  font-size: 9.5px;
+  text-align: center;
 }
 
 .text-message {

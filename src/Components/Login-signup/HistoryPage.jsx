@@ -101,7 +101,7 @@ const HistoryPage = () => {
 
   return (
     <div className='history-container mobile-history'>
-      <h1 className='heading'>History</h1>
+      <h1 className='heading history-page'>History</h1>
 
       <div className='details-section'>
         <div className='history-details'>

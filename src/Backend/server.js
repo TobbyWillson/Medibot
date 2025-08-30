@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"],
-    credentials: true, // allow sending cookies
+    credentials: true,
   })
 );
 
@@ -57,7 +57,7 @@ const chatSchema = new mongoose.Schema({
 });
 const Chat = mongoose.model("Chat", chatSchema);
 
-// ------------------ OpenAI / Gemini Setup ------------------
+// ------------------  Gemini Setup ------------------
 const gemini = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
@@ -74,7 +74,7 @@ app.post("/api/chat", (req, res) => {
   const streamId = uuidv4();
   streams[streamId] = { message };
 
-  res.json({ streamId }); // frontend uses this to open EventSource
+  res.json({ streamId });
 });
 
 // Step 2: Stream AI response via SSE
@@ -89,7 +89,7 @@ app.get("/api/chat/stream/:id", async (req, res) => {
   res.setHeader("Connection", "keep-alive");
 
   try {
-    // OpenAI/Gemini streaming call
+    // Gemini streaming call
     const completion = await gemini.chat.completions.create({
       model: "gemini-2.0-flash",
       messages: [
