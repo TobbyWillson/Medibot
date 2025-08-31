@@ -15,4 +15,7 @@ const chatSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Chat", chatSchema);
+// ✅ Prevent OverwriteModelError
+const Chat = mongoose.models.Chat || mongoose.model("Chat", chatSchema);
+
+export default Chat;

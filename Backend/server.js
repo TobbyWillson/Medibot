@@ -4,10 +4,15 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import { v4 as uuidv4 } from "uuid";
 
 import authRoutes from "./routes/auth.js";
+import chatRoutes from "./routes/chat.js";
+import streamRoutes from "./routes/stream.js";
+
+// server.js
+import Chat from "./models/Chat.js"; // ✅ just import
 
 dotenv.config();
 
@@ -15,37 +20,24 @@ const app = express();
 
 app.use(cookieParser());
 
-// CORS: allow your Vercel site + localhost
-const allowed = [process.env.FRONTEND_URL, "http://localhost:3000"];
 app.use(
   cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true);
-      if (allowed.some((a) => a && (a === origin || (a instanceof RegExp && a.test(origin))))) return cb(null, true);
-      // allow all *.vercel.app previews (optional, handy)
-      if (/\.vercel\.app$/.test(origin)) return cb(null, true);
-      return cb(new Error("Not allowed by CORS"));
-    },
+    origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"],
     credentials: true,
   })
 );
 
 // ------------------ Middlewares ------------------
-
+app.use(cors({ origin: ["http://localhost:3000", "https://medibot-coral.vercel.app"], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ------------------ Test Route ------------------
 app.get("/test", (req, res) => res.send("Server is working!"));
 
-app.get("/", (req, res) => res.send("Medibot backend is running 🚀"));
-
 // ------------------ MongoDB Setup ------------------
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/medibot", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/medibot")
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
@@ -58,17 +50,8 @@ app.get("/test-mongo", async (req, res) => {
   }
 });
 
-// ------------------ Chat Schema ------------------
-const chatSchema = new mongoose.Schema({
-  user: { type: String, default: "Anonymous" },
-  message: { type: String, required: true },
-  response: { type: String },
-  createdAt: { type: Date, default: Date.now },
-});
-const Chat = mongoose.model("Chat", chatSchema);
-
 // ------------------  Gemini Setup ------------------
-const gemini = new GoogleGenerativeAI({
+const gemini = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
@@ -147,6 +130,8 @@ app.get("/api/chat/stream/:id", async (req, res) => {
 
 // ------------------ Auth Routes ------------------
 app.use("/api/auth", authRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/stream", streamRoutes);
 
 // ------------------ Start Server ------------------
 const PORT = process.env.PORT || 5000;

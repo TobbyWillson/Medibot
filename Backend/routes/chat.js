@@ -2,16 +2,16 @@
 import express from "express";
 import Chat from "../models/Chat.js";
 import { authMiddleware } from "../middleware/auth.js";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { v4 as uuidv4 } from "uuid";
 
+import { v4 as uuidv4 } from "uuid";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
+
+dotenv.config();
 const router = express.Router();
 
 // ✅ Gemini client (via OpenAI SDK, with baseURL pointing to Google)
-const gemini = new GoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ------------------ SSE Streaming ------------------
 const streams = {};
@@ -39,30 +39,44 @@ router.get("/stream/:id", authMiddleware, async (req, res) => {
   let fullResponse = "";
 
   try {
-    // Gemini streaming call
-    const completion = await gemini.chat.completions.create({
-      model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
-      messages: [
-        { role: "system", content: "You are Medibot, a helpful medical assistant." },
-        { role: "user", content: userMessage },
-      ],
-      stream: true,
+    const model = genAI.getGenerativeModel({
+      model: process.env.GEMINI_MODEL || "gemini-1.5-flash",
     });
 
-    // Loop through streamed events
-    for await (const event of completion) {
-      const delta = event.choices?.[0]?.delta?.content;
+    const result = await model.generateContentStream(userMessage);
+
+    let index = 0;
+    for await (const chunk of result.stream) {
+      const delta = chunk.text();
       if (delta) {
         fullResponse += delta;
-        res.write(`data: ${delta}\n\n`);
+
+        // 🔑 Send OpenAI-style delta
+        const event = {
+          id: `chatcmpl-${Date.now()}`,
+          object: "chat.completion.chunk",
+          created: Math.floor(Date.now() / 1000),
+          model: "gemini-1.5-flash",
+          choices: [
+            {
+              index: 0,
+              delta: { role: index === 0 ? "assistant" : undefined, content: delta },
+              finish_reason: null,
+            },
+          ],
+        };
+
+        res.write(`data: ${JSON.stringify(event)}\n\n`);
+        index++;
       }
     }
 
+    // 🔑 Send final [DONE] marker
     res.write("data: [DONE]\n\n");
     res.end();
 
-    // ✅ Save messages to session
-    const sessionId = id; // reuse streamId as sessionId
+    // ✅ Save chat to DB
+    const sessionId = id;
     let chatSession = await Chat.findOne({ userId: req.user.id, sessionId });
 
     if (!chatSession) {
@@ -76,11 +90,14 @@ router.get("/stream/:id", authMiddleware, async (req, res) => {
     chatSession.messages.push({ role: "user", content: userMessage }, { role: "assistant", content: fullResponse });
 
     await chatSession.save();
-
     delete streams[id];
   } catch (err) {
-    console.error("SSE streaming error:", err.response?.data || err);
-    res.write("data: ⚠️ Something went wrong\n\n");
+    console.error("SSE streaming error:", err);
+    res.write(
+      `data: ${JSON.stringify({
+        error: "⚠️ Something went wrong",
+      })}\n\n`
+    );
     res.end();
   }
 });

@@ -107,12 +107,12 @@ const ChatPage = () => {
 
     try {
       // Step 1: Send message to backend to create a stream
-      const { data } = await api.post(`${process.env.REACT_APP_API_URL}/chat`, { message: userMessage.text });
+      const { data } = await api.post("/api/chat", { message: userMessage.text });
       const streamId = data.streamId;
 
       // Step 2: Prepare EventSource
-      const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-      const eventSource = new EventSource(`${baseURL}/chat/stream/${streamId}`);
+      const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const eventSource = new EventSource(`${baseURL}/api/chat/stream/${streamId}`);
 
       // Add a placeholder AI message for streaming
       const aiMessageId = Date.now() + 1;
