@@ -35,6 +35,9 @@ app.use(express.urlencoded({ extended: true }));
 // ------------------ Test Route ------------------
 app.get("/test", (req, res) => res.send("Server is working!"));
 
+// Health route (Render checks this)
+app.get("/", (req, res) => res.send("OK"));
+
 // ------------------ MongoDB Setup ------------------
 mongoose
   .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/medibot")
