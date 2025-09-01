@@ -52,7 +52,7 @@ const LoginPage = () => {
       <div className='inputs'>
         <div className='input'>
           <img src={emailIcon} alt='' />
-          <input type='email' placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type='email' placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} required />
         </div>
 
         <div className='input'>

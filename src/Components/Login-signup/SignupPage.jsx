@@ -64,7 +64,7 @@ const SignupPage = () => {
       <div className='inputs'>
         <div className='input'>
           <img src={userIcon} alt='' />
-          <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} />
         </div>
 
         <div className='input'>

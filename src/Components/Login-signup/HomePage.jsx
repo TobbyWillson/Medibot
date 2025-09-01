@@ -10,6 +10,7 @@ const HomePage = () => {
       <div className='home-container'>
         <h1>Meet Your New AI Companion</h1>
         <img src={android} alt='' className='robot' />
+
         <p className='version'>v1.0</p>
         <p className='welcome-message'>It is a pleasure to meet you! How can I assist you today?</p>
         <Link to='/login' className='get-started'>
@@ -48,6 +49,10 @@ const HomePage = () => {
             <Link to='/login' className='get-started'>
               Get Started
             </Link>
+
+            <p className='copyright'>
+              &copy; {new Date().getFullYear()} <span>Developed & Copyrighted by: </span> Oluwatobi Wilson
+            </p>
           </div>
         </div>
       </div>

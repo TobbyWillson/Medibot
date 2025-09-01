@@ -271,7 +271,12 @@ const ChatPage = () => {
               <VscSend className='message-icon' onClick={handleSendMessage} />
             </div>
           </div>
-          <p className='reliance'>Medibot can be wrong sometimes, consult a professional...</p>
+          <div className='reliance-copyright'>
+            <p className='reliance'>Medibot can be wrong sometimes, consult a professional...</p>
+            <p className='copyright'>
+              &copy; {new Date().getFullYear()} <span>Developed & Copyrighted by: </span> Oluwatobi Wilson
+            </p>
+          </div>
         </div>
       </div>
     </div>

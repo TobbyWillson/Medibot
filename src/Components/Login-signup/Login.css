@@ -8,7 +8,10 @@
 body {
   overflow: hidden;
   /* position: relative; */
-  background-color: black;
+  /* background-color: rgb(19, 30, 71); */
+  /* background-color: rgb(17, 34, 95); */
+  /* background-color: rgb(35, 50, 102); */
+  background-color: rgb(20, 20, 20);
   height: 100%;
 }
 
@@ -487,6 +490,7 @@ span {
 .history-container {
   height: 100vh;
   width: 90vw;
+  flex: 0 0 290px;
 }
 
 .history-container .heading {
@@ -618,6 +622,7 @@ span {
 /* ---------- Main Chat Section ---------- */
 .overall-chat {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 
@@ -737,6 +742,7 @@ span {
 }
 
 /* ---------- Input Box ---------- */
+
 .inputbox-bg {
   border-top: 1px solid #646464;
   box-shadow: 1px 1px 5px rgb(192, 192, 192);
@@ -744,6 +750,20 @@ span {
   border-top-left-radius: 20px;
   padding: 5px 10px;
   flex: 0 0 auto;
+}
+
+.inputbox-bg .reliance-copyright .reliance,
+.copyright,
+.others .copyright {
+  margin: 10px;
+  font-size: 9px;
+  text-align: center;
+}
+.inputbox-bg .reliance-copyright .copyright span,
+.others span {
+  font-style: italic;
+  color: #ffffff;
+  font-size: 8.5px;
 }
 
 .inputbox-bg .reliance {
@@ -859,7 +879,8 @@ span {
   }
 
   .desktop .underline {
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(49, 49, 49); */
+    background-color: rgb(88, 88, 88);
     height: 1px;
     width: 100%;
 
@@ -1003,6 +1024,18 @@ span {
 
   .overall-chat {
     flex: 1;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .history-container {
+    flex: 0 0 250px;
+  }
+  .overall-chat {
+    flex: 1;
+    width: auto;
+    margin-left: 0;
   }
 }
 
@@ -1072,7 +1105,9 @@ span {
   }
 
   .desktop .underline {
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(49, 49, 49); */
+    background-color: rgb(88, 88, 88);
+
     height: 1px;
     width: 100%;
     /* place-content: center; */
@@ -1156,5 +1191,10 @@ span {
     text-align: center;
     justify-content: center;
     left: 40%;
+  }
+
+  .overall-chat {
+    max-width: 80%;
+    margin: auto;
   }
 }
