@@ -12,19 +12,27 @@ body {
   /* background-color: rgb(17, 34, 95); */
   /* background-color: rgb(35, 50, 102); */
   background-color: rgb(20, 20, 20);
-  height: 100%;
+  height: 100vh;
 }
 
-.container {
+.login-page-all {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+}
+
+.overall-container .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center;
+  position: absolute;
+  top: -50%; */
 
-  margin: auto;
-  margin-top: 33vh;
+  /* margin: auto; */
+  /* margin-top: 33vh; */
   padding: 10px 0;
   background: rgb(255, 254, 254);
-  width: 335px;
+  width: 390px;
   border-radius: 10px;
   box-shadow: 1px 1px 20px black;
   position: relative;
@@ -33,11 +41,83 @@ body {
   /* height: 50vh; */
 }
 
+.login-desktop {
+  display: none;
+  /* display: flex; */
+  border: 1px solid rgb(199, 199, 199);
+  border-right: none;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.login-desktop .note {
+  background-color: rgb(49, 49, 49);
+  padding: 10px;
+
+  border-radius: 20px;
+  border-top-left-radius: 0px;
+  border-top-style: dotted;
+  border-top-color: rgb(180, 179, 179);
+}
+
+.overall-container .desktop-robot {
+  max-width: 310px;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
+}
+
+.overall-container .desktop-robot.sign-up {
+  margin: 34px auto;
+}
+
+.overall-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.medibot-head {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  place-content: center;
+
+  align-items: center;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.medibot-head .heading {
+  padding: 0px;
+  margin-bottom: -6px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #696969;
+}
+
+.medibot-head .robot {
+  font-size: 60px;
+
+  color: #2f82e0;
+  margin-right: 10px;
+}
+
+.medibot-head .copyright {
+  margin: 0;
+  font-size: 8px;
+  font-weight: bold;
+  font-style: italic;
+}
+
 .container-bg img {
   max-width: 170px;
   position: absolute;
   top: 5%;
-  left: 55%;
+  left: 58%;
   opacity: 15%;
 }
 
@@ -53,13 +133,19 @@ body {
 .header .underline {
   height: 3px;
   width: 30px;
-  margin-top: 10px;
-  background-color: black;
+  margin-top: 3px;
+  background-color: rgb(65, 65, 65);
+}
+
+.header p {
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .header .header-text {
   font-size: 20px;
   font-weight: bold;
+  color: rgb(65, 65, 65);
 }
 
 .inputs .input {
@@ -405,6 +491,7 @@ span {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  max-width: 100%;
 }
 
 .user-ai {
@@ -622,6 +709,7 @@ span {
 /* ---------- Main Chat Section ---------- */
 .overall-chat {
   flex: 1;
+  width: 100%;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1027,6 +1115,59 @@ span {
     width: 100%;
   }
 }
+
+/* Log in section */
+
+@media (min-width: 768px) {
+  /* Log in section */
+  .login-desktop {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-right: 20px;
+  }
+
+  .login-desktop p {
+    display: none;
+  }
+
+  .medibot-head .robot {
+    display: none;
+  }
+}
+
+@media (min-width: 960px) {
+  /* Log in section */
+  .login-desktop {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
+
+  .login-desktop p {
+    display: block;
+    /* text-align: justify; */
+    font-style: italic;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Log in section */
+  .login-desktop {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-right: 20px;
+  }
+}
+
+/* ........................ */
 
 @media (min-width: 769px) and (max-width: 1199px) {
   .history-container {
