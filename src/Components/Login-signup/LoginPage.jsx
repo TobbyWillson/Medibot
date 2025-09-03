@@ -42,7 +42,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='login-page-all'>
+    <div className='login-sign-page-all'>
       <div className='overall-container'>
         <div className='login-desktop'>
           <div>
