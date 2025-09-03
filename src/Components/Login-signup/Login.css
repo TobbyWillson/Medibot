@@ -1059,7 +1059,7 @@ span {
 
 @media (min-width: 1200px) {
   .chat-interface {
-    max-width: 99vw;
+    max-width: 100vw;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -1122,13 +1122,13 @@ span {
 
 @media (max-width: 410px) {
   .overall-container .container {
-    width: 360px;
+    width: 355px;
   }
 }
 
-@media (max-width: 3900px) {
+@media (max-width: 390px) {
   .overall-container .container {
-    width: 335px;
+    width: 330px;
   }
 }
 @media (min-width: 768px) {
@@ -1348,7 +1348,7 @@ span {
   }
 
   .overall-chat {
-    max-width: 80%;
+    max-width: 100%;
     margin: auto;
   }
 }
