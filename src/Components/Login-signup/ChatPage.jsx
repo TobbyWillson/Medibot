@@ -273,9 +273,6 @@ const ChatPage = () => {
           </div>
           <div className='reliance-copyright'>
             <p className='reliance'>Medibot can be wrong sometimes, consult a professional...</p>
-            <p className='copyright'>
-              &copy; {new Date().getFullYear()} <span>Developed & Copyrighted by: </span> Oluwatobi Wilson
-            </p>
           </div>
         </div>
       </div>

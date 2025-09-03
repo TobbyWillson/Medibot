@@ -1118,6 +1118,17 @@ span {
 
 /* Log in section */
 
+@media (max-width: 410px) {
+  .overall-container .container {
+    width: 360px;
+  }
+}
+
+@media (max-width: 3900px) {
+  .overall-container .container {
+    width: 335px;
+  }
+}
 @media (min-width: 768px) {
   /* Log in section */
   .login-desktop {
